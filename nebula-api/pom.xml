@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nebula</groupId>
+        <artifactId>NebulaHub-backend</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>nebula-api</artifactId>
+    <name>nebula-api</name>
+    <description>API controllers and Feign clients</description>
+
+    <dependencies>
+        <!-- nebula-model (实体类、DTO、VO) -->
+        <dependency>
+            <groupId>com.nebula</groupId>
+            <artifactId>nebula-model</artifactId>
+        </dependency>
+
+        <!-- nebula-service (业务服务层) -->
+        <dependency>
+            <groupId>com.nebula</groupId>
+            <artifactId>nebula-service</artifactId>
+        </dependency>
+
+        <!-- nebula-config (配置、Result、异常处理等) -->
+        <dependency>
+            <groupId>com.nebula</groupId>
+            <artifactId>nebula-config</artifactId>
+        </dependency>
+
+        <!-- OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Load Balancer -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+    </dependencies>
+</project>
