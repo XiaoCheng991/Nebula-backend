@@ -26,8 +26,14 @@ public class UserProfile extends BaseEntity {
     @Schema(description = "显示名称")
     private String displayName;
 
-    @Schema(description = "头像URL")
+    @Schema(description = "头像文件名称")
+    private String avatarName;
+
+    @Schema(description = "头像在MinIO中的URL")
     private String avatarUrl;
+
+    @Schema(description = "头像文件大小（字节）")
+    private Long avatarSize;
 
     @Schema(description = "个人简介")
     private String bio;

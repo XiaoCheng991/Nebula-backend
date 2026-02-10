@@ -39,8 +39,5 @@ public class LoginVO {
 
         @Schema(description = "昵称")
         private String nickname;
-
-        @Schema(description = "头像")
-        private String avatar;
     }
 }

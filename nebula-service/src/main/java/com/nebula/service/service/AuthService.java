@@ -22,12 +22,12 @@ public interface AuthService {
     /**
      * 用户登出
      */
-    void logout(String token);
+    void logout(Long userId);
 
     /**
      * 获取用户信息
      */
-    LoginVO.UserInfo getUserInfo(String token);
+    LoginVO.UserInfo getUserInfo(Long userId);
 
     /**
      * 验证token

@@ -35,9 +35,6 @@ public class SysUser extends BaseEntity {
     @Schema(description = "昵称")
     private String nickname;
 
-    @Schema(description = "头像")
-    private String avatar;
-
     @Schema(description = "状态（0-禁用，1-启用）")
     private Integer status;
 

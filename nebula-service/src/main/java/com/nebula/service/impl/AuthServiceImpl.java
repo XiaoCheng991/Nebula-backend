@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -82,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
                 jwtProperties.getRefreshTokenExpiration()
         );
 
-        // 存储Access Token到Redis
+        // 存储Access Token到Redis（按userId和按token值两种索引，方便根据token或userId查找）
         String tokenKey = RedisConstant.TOKEN_PREFIX + sysUser.getId();
         redisTemplate.opsForValue().set(
                 tokenKey,
@@ -90,12 +91,26 @@ public class AuthServiceImpl implements AuthService {
                 jwtProperties.getAccessTokenExpiration() / 1000,
                 TimeUnit.SECONDS
         );
+        String accessTokenValueKey = RedisConstant.TOKEN_PREFIX + accessToken;
+        redisTemplate.opsForValue().set(
+                accessTokenValueKey,
+                sysUser.getId(),
+                jwtProperties.getAccessTokenExpiration() / 1000,
+                TimeUnit.SECONDS
+        );
 
-        // 存储Refresh Token到Redis（key不同，用refresh前缀）
+        // 存储Refresh Token到Redis（按userId和按token值两种索引）
         String refreshTokenKey = RedisConstant.TOKEN_PREFIX + "refresh:" + sysUser.getId();
         redisTemplate.opsForValue().set(
                 refreshTokenKey,
                 refreshToken,
+                jwtProperties.getRefreshTokenExpiration() / 1000,
+                TimeUnit.SECONDS
+        );
+        String refreshTokenValueKey = RedisConstant.TOKEN_PREFIX + "refresh_token_value:" + refreshToken;
+        redisTemplate.opsForValue().set(
+                refreshTokenValueKey,
+                sysUser.getId(),
                 jwtProperties.getRefreshTokenExpiration() / 1000,
                 TimeUnit.SECONDS
         );
@@ -114,7 +129,6 @@ public class AuthServiceImpl implements AuthService {
         userInfo.setUsername(sysUser.getUsername());
         userInfo.setEmail(sysUser.getEmail());
         userInfo.setNickname(sysUser.getNickname());
-        userInfo.setAvatar(profile != null ? profile.getAvatarUrl() : null);
 
         loginVO.setUserInfo(userInfo);
 
@@ -187,12 +201,26 @@ public class AuthServiceImpl implements AuthService {
                 jwtProperties.getAccessTokenExpiration() / 1000,
                 TimeUnit.SECONDS
         );
+        String accessTokenValueKey = RedisConstant.TOKEN_PREFIX + accessToken;
+        redisTemplate.opsForValue().set(
+                accessTokenValueKey,
+                sysUser.getId(),
+                jwtProperties.getAccessTokenExpiration() / 1000,
+                TimeUnit.SECONDS
+        );
 
         // 存储Refresh Token到Redis
         String refreshTokenKey = RedisConstant.TOKEN_PREFIX + "refresh:" + sysUser.getId();
         redisTemplate.opsForValue().set(
                 refreshTokenKey,
                 refreshToken,
+                jwtProperties.getRefreshTokenExpiration() / 1000,
+                TimeUnit.SECONDS
+        );
+        String refreshTokenValueKey = RedisConstant.TOKEN_PREFIX + "refresh_token_value:" + refreshToken;
+        redisTemplate.opsForValue().set(
+                refreshTokenValueKey,
+                sysUser.getId(),
                 jwtProperties.getRefreshTokenExpiration() / 1000,
                 TimeUnit.SECONDS
         );
@@ -207,7 +235,6 @@ public class AuthServiceImpl implements AuthService {
         userInfo.setUsername(sysUser.getUsername());
         userInfo.setEmail(sysUser.getEmail());
         userInfo.setNickname(sysUser.getNickname());
-        userInfo.setAvatar(null);
 
         loginVO.setUserInfo(userInfo);
 
@@ -216,38 +243,44 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void logout(String token) {
+    public void logout(Long userId) {
         try {
-            // 从token中获取用户ID（使用配置的密钥）
-            Long userId = JwtUtil.parseToken(token, jwtProperties.getSecret()).get("userId", Long.class);
-            if (userId != null) {
-                // 删除Redis中的access token
-                String tokenKey = RedisConstant.TOKEN_PREFIX + userId;
-                redisTemplate.delete(tokenKey);
-
-                // 删除Redis中的refresh token
-                String refreshTokenKey = RedisConstant.TOKEN_PREFIX + "refresh:" + userId;
-                redisTemplate.delete(refreshTokenKey);
-
-                log.info("用户登出成功: userId={}", userId);
+            if (userId == null) {
+                throw new RuntimeException("用户未登录");
             }
+
+            // 删除Redis中的access token（按userId和按token值两种索引）
+            String tokenKey = RedisConstant.TOKEN_PREFIX + userId;
+            String accessToken = (String) redisTemplate.opsForValue().get(tokenKey);
+            if (accessToken != null) {
+                String accessTokenValueKey = RedisConstant.TOKEN_PREFIX + accessToken;
+                redisTemplate.delete(accessTokenValueKey);
+            }
+            redisTemplate.delete(tokenKey);
+
+            // 删除Redis中的refresh token（按userId和按token值两种索引）
+            String refreshTokenKey = RedisConstant.TOKEN_PREFIX + "refresh:" + userId;
+            String refreshToken = (String) redisTemplate.opsForValue().get(refreshTokenKey);
+            if (refreshToken != null) {
+                String refreshTokenValueKey = RedisConstant.TOKEN_PREFIX + "refresh_token_value:" + refreshToken;
+                redisTemplate.delete(refreshTokenValueKey);
+            }
+            redisTemplate.delete(refreshTokenKey);
+
+            log.info("用户登出成功: userId={}", userId);
         } catch (Exception e) {
             log.error("登出失败", e);
         }
     }
 
     @Override
-    public LoginVO.UserInfo getUserInfo(String token) {
+    public LoginVO.UserInfo getUserInfo(Long userId) {
         try {
-            // 验证token并获取用户ID（使用配置的密钥）
-            // JwtUtil.parseToken() 已经验证了JWT签名和过期时间
-            Long userId = JwtUtil.parseToken(token, jwtProperties.getSecret()).get("userId", Long.class);
             if (userId == null) {
-                throw new RuntimeException("无效的token");
+                throw new RuntimeException("用户未登录");
             }
 
-            // 检查Redis中是否存在该用户的token（会话检查）
-            // 不要求token完全匹配，只要用户有有效会话即可
+            // 会话检查：确认该用户仍有有效的 access token
             String tokenKey = RedisConstant.TOKEN_PREFIX + userId;
             String cachedToken = (String) redisTemplate.opsForValue().get(tokenKey);
             if (cachedToken == null) {
@@ -268,7 +301,6 @@ public class AuthServiceImpl implements AuthService {
             userInfo.setUsername(sysUser.getUsername());
             userInfo.setEmail(sysUser.getEmail());
             userInfo.setNickname(sysUser.getNickname());
-            userInfo.setAvatar(profile != null ? profile.getAvatarUrl() : null);
 
             return userInfo;
         } catch (Exception e) {
@@ -280,23 +312,24 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Long validateToken(String token) {
         try {
-            // 移除 "Bearer " 前缀
+            if (token == null || token.trim().isEmpty()) {
+                throw new RuntimeException("token不能为空");
+            }
+
+            // 清理token字符串（移除前后空格和Bearer前缀）
+            token = token.trim();
             if (token.startsWith("Bearer ")) {
-                token = token.substring(7);
+                token = token.substring(7).trim();
             }
 
-            // 验证token并获取用户ID（使用配置的密钥）
-            // JwtUtil.parseToken() 已经验证了JWT签名和过期时间
-            Long userId = JwtUtil.parseToken(token, jwtProperties.getSecret()).get("userId", Long.class);
-            if (userId == null) {
-                throw new RuntimeException("无效的token");
-            }
+            // 根据 token 值从 Redis 中获取 userId（不再解析JWT）
+            String accessTokenValueKey = RedisConstant.TOKEN_PREFIX + token;
+            Long userId = Long.valueOf(Objects.requireNonNull(redisTemplate.opsForValue().get(accessTokenValueKey)).toString());
 
-            // 检查Redis中是否存在该用户的token（会话检查）
-            // 不要求token完全匹配，只要用户有有效会话即可
+            // 再次确认该用户会话仍然存在
             String tokenKey = RedisConstant.TOKEN_PREFIX + userId;
             String cachedToken = (String) redisTemplate.opsForValue().get(tokenKey);
-            if (cachedToken == null) {
+            if (cachedToken == null || !cachedToken.equals(token)) {
                 throw new RuntimeException("token已过期或用户未登录");
             }
 
@@ -311,13 +344,20 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public LoginVO refreshToken(String refreshToken) {
         try {
-            // 解析refresh token（使用配置的密钥）
-            Long userId = JwtUtil.parseToken(refreshToken, jwtProperties.getSecret()).get("userId", Long.class);
-            if (userId == null) {
-                throw new RuntimeException("无效的refresh token");
+            if (refreshToken == null || refreshToken.trim().isEmpty()) {
+                throw new RuntimeException("refresh token不能为空");
             }
 
-            // 验证refresh token是否在Redis中
+            refreshToken = refreshToken.trim();
+
+            // 根据 refresh token 值从 Redis 中获取 userId（不再解析JWT）
+            String refreshTokenValueKey = RedisConstant.TOKEN_PREFIX + "refresh_token_value:" + refreshToken;
+            Long userId = (Long) redisTemplate.opsForValue().get(refreshTokenValueKey);
+            if (userId == null) {
+                throw new RuntimeException("refresh token已过期或无效");
+            }
+
+            // 再从按 userId 的 key 再次确认 refresh token 是否一致
             String refreshTokenKey = RedisConstant.TOKEN_PREFIX + "refresh:" + userId;
             String cachedRefreshToken = (String) redisTemplate.opsForValue().get(refreshTokenKey);
             if (cachedRefreshToken == null || !cachedRefreshToken.equals(refreshToken)) {
@@ -359,10 +399,24 @@ public class AuthServiceImpl implements AuthService {
                     jwtProperties.getAccessTokenExpiration() / 1000,
                     TimeUnit.SECONDS
             );
+            String newAccessTokenValueKey = RedisConstant.TOKEN_PREFIX + newAccessToken;
+            redisTemplate.opsForValue().set(
+                    newAccessTokenValueKey,
+                    sysUser.getId(),
+                    jwtProperties.getAccessTokenExpiration() / 1000,
+                    TimeUnit.SECONDS
+            );
 
             redisTemplate.opsForValue().set(
                     refreshTokenKey,
                     newRefreshToken,
+                    jwtProperties.getRefreshTokenExpiration() / 1000,
+                    TimeUnit.SECONDS
+            );
+            String newRefreshTokenValueKey = RedisConstant.TOKEN_PREFIX + "refresh_token_value:" + newRefreshToken;
+            redisTemplate.opsForValue().set(
+                    newRefreshTokenValueKey,
+                    sysUser.getId(),
                     jwtProperties.getRefreshTokenExpiration() / 1000,
                     TimeUnit.SECONDS
             );
@@ -377,7 +431,6 @@ public class AuthServiceImpl implements AuthService {
             userInfo.setUsername(sysUser.getUsername());
             userInfo.setEmail(sysUser.getEmail());
             userInfo.setNickname(sysUser.getNickname());
-            userInfo.setAvatar(profile != null ? profile.getAvatarUrl() : null);
 
             loginVO.setUserInfo(userInfo);
 

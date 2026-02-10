@@ -89,9 +89,12 @@ public class OAuthServiceImpl implements OAuthService {
             claims.put("email", sysUser.getEmail());
             String token = JwtUtil.generateToken(claims);
 
-            // 5. 存储token到Redis
+            // 5. 存储token到Redis（按userId和按token值两种索引，保持与密码登录一致）
             String tokenKey = RedisConstant.TOKEN_PREFIX + sysUser.getId();
             redisTemplate.opsForValue().set(tokenKey, token, RedisConstant.TOKEN_EXPIRE, TimeUnit.SECONDS);
+
+            String accessTokenValueKey = RedisConstant.TOKEN_PREFIX + token;
+            redisTemplate.opsForValue().set(accessTokenValueKey, sysUser.getId(), RedisConstant.TOKEN_EXPIRE, TimeUnit.SECONDS);
 
             // 6. 构建返回结果
             LoginVO loginVO = new LoginVO();
@@ -102,7 +105,6 @@ public class OAuthServiceImpl implements OAuthService {
             userInfo.setUsername(sysUser.getUsername());
             userInfo.setEmail(sysUser.getEmail());
             userInfo.setNickname(sysUser.getNickname());
-            userInfo.setAvatar(sysUser.getAvatar());
 
             loginVO.setUserInfo(userInfo);
 
@@ -142,7 +144,6 @@ public class OAuthServiceImpl implements OAuthService {
             sysUser.setPassword(passwordEncoder.encode(UUID.randomUUID().toString())); // 随机密码
             sysUser.setEmail(githubUser.getEmail() != null ? githubUser.getEmail() : "github_" + githubUser.getId() + "@github.com");
             sysUser.setNickname(githubUser.getName() != null ? githubUser.getName() : githubUser.getLogin());
-            sysUser.setAvatar(githubUser.getAvatarUrl());
             sysUser.setStatus(1);
             sysUserMapper.insert(sysUser);
 

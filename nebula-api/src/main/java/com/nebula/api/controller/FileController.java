@@ -33,12 +33,26 @@ public class FileController {
     @Operation(summary = "上传文件")
     public Result<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
+            // 验证文件是否为空
+            if (file == null || file.isEmpty()) {
+                return Result.error("文件不能为空");
+            }
+
+            // 验证文件大小（10MB）
+            long maxSize = 10 * 1024 * 1024; // 10MB
+            if (file.getSize() > maxSize) {
+                return Result.error("文件大小不能超过 10MB");
+            }
+
             // 生成唯一文件名
             String originalFilename = file.getOriginalFilename();
             String extension = originalFilename != null && originalFilename.contains(".")
                     ? originalFilename.substring(originalFilename.lastIndexOf("."))
                     : "";
             String fileName = UUID.randomUUID().toString() + extension;
+
+            log.info("开始上传文件: originalName={}, size={}, fileName={}",
+                    originalFilename, file.getSize(), fileName);
 
             // 上传文件
             minioUtil.uploadFile(bucketName, fileName, file);
@@ -51,9 +65,16 @@ public class FileController {
             data.put("fileUrl", fileUrl);
             data.put("originalFilename", originalFilename);
 
+            log.info("文件上传成功: fileName={}", fileName);
             return Result.success("上传成功", data);
         } catch (Exception e) {
-            log.error("文件上传失败", e);
+            log.error("文件上传失败: {}", e.getMessage(), e);
+
+            // 判断是否是文件大小超限异常
+            if (e.getMessage() != null && e.getMessage().contains("FileSizeLimitExceededException")) {
+                return Result.error("文件大小超过限制，最大支持 10MB");
+            }
+
             return Result.error("文件上传失败: " + e.getMessage());
         }
     }

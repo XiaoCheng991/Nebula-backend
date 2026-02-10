@@ -42,14 +42,17 @@ public class AuthController {
     @PostMapping("/logout")
     @Operation(summary = "用户登出")
     public Result<Void> logout(@RequestHeader("Authorization") String token) {
-        authService.logout(token);
+        Long userId = authService.validateToken(token);
+        authService.logout(userId);
         return Result.success("登出成功");
     }
 
     @GetMapping("/user-info")
     @Operation(summary = "获取当前用户信息")
     public Result<LoginVO.UserInfo> getUserInfo(@RequestHeader("Authorization") String token) {
-        LoginVO.UserInfo userInfo = authService.getUserInfo(token);
+        // 先验证 token，获取 userId，再根据 userId 查询用户信息
+        Long userId = authService.validateToken(token);
+        LoginVO.UserInfo userInfo = authService.getUserInfo(userId);
         return Result.success(userInfo);
     }
 

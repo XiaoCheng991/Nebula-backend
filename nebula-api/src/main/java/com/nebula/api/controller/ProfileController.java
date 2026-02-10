@@ -30,7 +30,8 @@ public class ProfileController {
     @Operation(summary = "获取用户档案", description = "获取当前用户的完整档案信息")
     public Result<UserProfileDTO> getUserProfile(@RequestHeader("Authorization") String token) {
         try {
-            LoginVO.UserInfo userInfo = authService.getUserInfo(token);
+            Long userId = authService.validateToken(token);
+            LoginVO.UserInfo userInfo = authService.getUserInfo(userId);
 
             // 从数据库获取完整的用户档案
             UserProfile profile = userProfileMapper.selectById(userInfo.getId());
@@ -38,7 +39,8 @@ public class ProfileController {
             UserProfileDTO profileDTO = new UserProfileDTO();
             profileDTO.setUsername(profile != null ? profile.getUsername() : userInfo.getUsername());
             profileDTO.setDisplayName(profile != null ? profile.getDisplayName() : userInfo.getNickname());
-            profileDTO.setAvatar(userInfo.getAvatar());
+            // 优先从数据库的 UserProfile 获取头像URL，如果没有则使用 userInfo 中的旧数据
+            profileDTO.setAvatar(profile != null && profile.getAvatarUrl() != null ? profile.getAvatarUrl() : null);
             // 确保bio不会是null，使用空字符串作为默认值
             String bio = profile != null ? profile.getBio() : "";
             profileDTO.setBio(bio != null ? bio : "");
@@ -58,7 +60,8 @@ public class ProfileController {
     ) {
         try {
             // 从token获取用户ID
-            LoginVO.UserInfo userInfo = authService.getUserInfo(token);
+            Long userId = authService.validateToken(token);
+            LoginVO.UserInfo userInfo = authService.getUserInfo(userId);
 
             // 查询现有档案
             UserProfile profile = userProfileMapper.selectById(userInfo.getId());
@@ -91,6 +94,91 @@ public class ProfileController {
         } catch (Exception e) {
             log.error("更新用户档案失败", e);
             return Result.error(e.getMessage());
+        }
+    }
+
+    @PutMapping("/profile/avatar")
+    @Operation(summary = "更新用户头像", description = "更新当前用户的头像信息")
+    public Result<Void> updateUserAvatar(
+            @RequestHeader("Authorization") String token,
+            @RequestBody AvatarUpdateRequest avatarRequest
+    ) {
+        try {
+            // 从token获取用户ID
+            Long userId = authService.validateToken(token);
+            LoginVO.UserInfo userInfo = authService.getUserInfo(userId);
+
+            // 查询现有档案
+            UserProfile profile = userProfileMapper.selectById(userInfo.getId());
+            if (profile == null) {
+                // 如果档案不存在，创建新的
+                profile = new UserProfile();
+                profile.setId(userInfo.getId());
+                profile.setUsername(userInfo.getUsername());
+                profile.setDisplayName(userInfo.getNickname());
+                profile.setAvatarName(avatarRequest.getAvatarName());
+                profile.setAvatarUrl(avatarRequest.getAvatarUrl());
+                profile.setAvatarSize(avatarRequest.getAvatarSize());
+                profile.setStatus("offline");
+                profile.setLastSeenAt(java.time.LocalDateTime.now());
+                profile.setCreateTime(java.time.LocalDateTime.now());
+                profile.setUpdateTime(java.time.LocalDateTime.now());
+                profile.setDeleted(0);
+                userProfileMapper.insert(profile);
+            } else {
+                // 更新现有档案的头像字段
+                profile.setAvatarName(avatarRequest.getAvatarName());
+                profile.setAvatarUrl(avatarRequest.getAvatarUrl());
+                profile.setAvatarSize(avatarRequest.getAvatarSize());
+                profile.setUpdateTime(java.time.LocalDateTime.now());
+                userProfileMapper.updateById(profile);
+            }
+
+            log.info("更新用户头像成功: userId={}, avatarName={}, avatarSize={}",
+                    userInfo.getId(), avatarRequest.getAvatarName(), avatarRequest.getAvatarSize());
+            return Result.success("头像更新成功");
+        } catch (Exception e) {
+            log.error("更新用户头像失败", e);
+            return Result.error(e.getMessage());
+        }
+    }
+
+    /**
+     * 头像更新请求DTO
+     */
+    @io.swagger.v3.oas.annotations.media.Schema(description = "头像更新请求")
+    public static class AvatarUpdateRequest {
+        @io.swagger.v3.oas.annotations.media.Schema(description = "头像文件名称", required = true)
+        private String avatarName;
+
+        @io.swagger.v3.oas.annotations.media.Schema(description = "头像在MinIO中的URL", required = true)
+        private String avatarUrl;
+
+        @io.swagger.v3.oas.annotations.media.Schema(description = "头像文件大小（字节）", required = true)
+        private Long avatarSize;
+
+        public String getAvatarName() {
+            return avatarName;
+        }
+
+        public void setAvatarName(String avatarName) {
+            this.avatarName = avatarName;
+        }
+
+        public String getAvatarUrl() {
+            return avatarUrl;
+        }
+
+        public void setAvatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+        }
+
+        public Long getAvatarSize() {
+            return avatarSize;
+        }
+
+        public void setAvatarSize(Long avatarSize) {
+            this.avatarSize = avatarSize;
         }
     }
 }

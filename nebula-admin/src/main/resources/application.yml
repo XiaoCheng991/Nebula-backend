@@ -8,6 +8,16 @@ spring:
   main:
     banner-mode: console
 
+  # 文件上传配置
+  servlet:
+    multipart:
+      # 单个文件最大大小（默认1MB，改为10MB）
+      max-file-size: 10MB
+      # 请求最大大小（默认10MB，改为50MB）
+      max-request-size: 50MB
+      # 是否启用文件上传
+      enabled: true
+
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -55,7 +65,7 @@ minio:
   endpoint: http://49.235.149.73:9000
   access-key: admin
   secret-key: Cyq15137217844@
-  bucket-name: nebula
+  bucket-name: user-uploads
 
 # JWT配置
 jwt:
