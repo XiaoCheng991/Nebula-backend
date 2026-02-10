@@ -9,6 +9,7 @@ import com.nebula.service.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -146,6 +147,7 @@ public class ProfileController {
     /**
      * 头像更新请求DTO
      */
+    @Getter
     @io.swagger.v3.oas.annotations.media.Schema(description = "头像更新请求")
     public static class AvatarUpdateRequest {
         @io.swagger.v3.oas.annotations.media.Schema(description = "头像文件名称", required = true)
@@ -157,28 +159,5 @@ public class ProfileController {
         @io.swagger.v3.oas.annotations.media.Schema(description = "头像文件大小（字节）", required = true)
         private Long avatarSize;
 
-        public String getAvatarName() {
-            return avatarName;
-        }
-
-        public void setAvatarName(String avatarName) {
-            this.avatarName = avatarName;
-        }
-
-        public String getAvatarUrl() {
-            return avatarUrl;
-        }
-
-        public void setAvatarUrl(String avatarUrl) {
-            this.avatarUrl = avatarUrl;
-        }
-
-        public Long getAvatarSize() {
-            return avatarSize;
-        }
-
-        public void setAvatarSize(Long avatarSize) {
-            this.avatarSize = avatarSize;
-        }
     }
 }

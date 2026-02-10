@@ -16,8 +16,7 @@ SET
     avatar_url_new = avatar_url,
     avatar_name = CASE
         WHEN avatar_url IS NOT NULL THEN SUBSTRING_INDEX(avatar_url, '/', -1)
-        ELSE NULL
-    END
+        END
 WHERE avatar_url IS NOT NULL;
 
 -- 3. 删除旧的 avatar_url 字段

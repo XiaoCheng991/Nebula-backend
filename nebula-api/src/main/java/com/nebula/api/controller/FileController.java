@@ -49,7 +49,7 @@ public class FileController {
             String extension = originalFilename != null && originalFilename.contains(".")
                     ? originalFilename.substring(originalFilename.lastIndexOf("."))
                     : "";
-            String fileName = UUID.randomUUID().toString() + extension;
+            String fileName = UUID.randomUUID() + extension;
 
             log.info("开始上传文件: originalName={}, size={}, fileName={}",
                     originalFilename, file.getSize(), fileName);
