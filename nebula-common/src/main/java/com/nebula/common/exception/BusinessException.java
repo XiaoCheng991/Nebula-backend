@@ -113,4 +113,49 @@ public class BusinessException extends RuntimeException {
                 ", message='" + message + '\'' +
                 '}';
     }
+
+    /**
+     * 获取对应的 HTTP 状态码
+     */
+    public int getHttpStatusCode() {
+        return getHttpStatusCode(this.code);
+    }
+
+    /**
+     * 根据错误码获取 HTTP 状态码
+     */
+    public static int getHttpStatusCode(int errorCode) {
+        // 认证相关错误 2xxx
+        if (errorCode >= 2000 && errorCode < 2100) {
+            switch (errorCode) {
+                case 2001: // UNAUTHORIZED
+                case 2002: // TOKEN_EXPIRED
+                case 2003: // TOKEN_INVALID
+                case 2004: // TOKEN_MISSING
+                case 2005: // REFRESH_TOKEN_EXPIRED
+                case 2006: // REFRESH_TOKEN_INVALID
+                    return 401;
+                default:
+                    return 401;
+            }
+        }
+        // 参数错误 1xxx
+        if (errorCode >= 1000 && errorCode < 2000) {
+            return 400;
+        }
+        // 业务逻辑错误 9xxx
+        if (errorCode >= 9000 && errorCode < 10000) {
+            switch (errorCode) {
+                case 9003: // PERMISSION_DENIED
+                    return 403;
+                case 9002: // RESOURCE_NOT_FOUND
+                    return 404;
+                default:
+                    return 400;
+            }
+        }
+        // 其他错误默认返回 500
+        return 500;
+    }
+
 }

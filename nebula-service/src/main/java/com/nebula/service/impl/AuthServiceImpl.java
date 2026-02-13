@@ -147,9 +147,7 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException(ErrorCode.USER_NOT_FOUND);
         }
 
-        userProfileMapper.selectById(userId);
         LogUtil.Auth.getUserInfo(log, userId);
-
         return buildUserInfo(sysUser);
     }
 
@@ -196,8 +194,6 @@ public class AuthServiceImpl implements AuthService {
             LogUtil.Auth.tokenRefreshFailed(log, "用户不存在或已被禁用");
             throw new BusinessException(ErrorCode.USER_NOT_FOUND);
         }
-
-        userProfileMapper.selectById(userId);
 
         // 获取旧的 Token
         String oldAccessToken = tokenStorageService.getAccessToken(userId);
