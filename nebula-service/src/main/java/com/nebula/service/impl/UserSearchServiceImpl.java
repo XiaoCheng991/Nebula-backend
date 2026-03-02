@@ -42,7 +42,6 @@ public class UserSearchServiceImpl implements UserSearchService {
 
         // 在线状态筛选
         if (StringUtils.hasText(onlineStatus)) {
-            // 需要通过UserProfile表查询，这里简化处理
             // 实际项目中可能需要联合查询
         }
 

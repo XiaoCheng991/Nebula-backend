@@ -11,10 +11,8 @@ import com.nebula.config.config.JwtProperties;
 import com.nebula.model.dto.LoginDTO;
 import com.nebula.model.dto.RegisterDTO;
 import com.nebula.model.entity.SysUser;
-import com.nebula.model.entity.UserProfile;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
-import com.nebula.service.mapper.UserProfileMapper;
 import com.nebula.service.service.AuthService;
 import com.nebula.service.service.TokenStorageService;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +34,6 @@ import java.util.Map;
 public class AuthServiceImpl implements AuthService {
 
     private final SysUserMapper sysUserMapper;
-    private final UserProfileMapper userProfileMapper;
     private final PasswordEncoder passwordEncoder;
     private final TokenStorageService tokenStorageService;
     private final JwtProperties jwtProperties;
@@ -98,11 +95,6 @@ public class AuthServiceImpl implements AuthService {
         SysUser sysUser = createSysUser(registerDTO);
         sysUserMapper.insert(sysUser);
         LogUtil.Database.insert(log, "sys_user", sysUser.getId());
-
-        // 创建用户档案
-        UserProfile profile = createUserProfile(sysUser);
-        userProfileMapper.insert(profile);
-        LogUtil.Database.insert(log, "user_profile", sysUser.getId());
 
         // 生成 Token
         TokenPair tokens = generateTokens(sysUser);
@@ -269,22 +261,6 @@ public class AuthServiceImpl implements AuthService {
         sysUser.setNickname(registerDTO.getNickname() != null ? registerDTO.getNickname() : registerDTO.getUsername());
         sysUser.setAccountStatus(1);
         return sysUser;
-    }
-
-    /**
-     * 创建用户档案
-     */
-    private UserProfile createUserProfile(SysUser sysUser) {
-        UserProfile profile = new UserProfile();
-        profile.setId(sysUser.getId());
-        profile.setUsername(sysUser.getUsername());
-        profile.setDisplayName(sysUser.getNickname());
-        profile.setStatus("offline");
-        profile.setLastSeenAt(LocalDateTime.now());
-        profile.setCreateTime(LocalDateTime.now());
-        profile.setUpdateTime(LocalDateTime.now());
-        profile.setDeleted(0);
-        return profile;
     }
 
     /**

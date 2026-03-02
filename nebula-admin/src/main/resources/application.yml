@@ -21,16 +21,16 @@ spring:
   # 数据源配置 (PostgreSQL)
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localshot:5432/postgres
-    username: postgres
-    password: 123456
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: admin
+    password: admin
 
   # Redis配置
   data:
     redis:
       host: localshot
       port: 6379
-      password:
+      password: 123123
       database: 0
       timeout: 5000ms
       lettuce:
@@ -39,6 +39,19 @@ spring:
           max-wait: -1ms
           max-idle: 8
           min-idle: 0
+
+  # 邮件配置
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: 17516476723@163.com
+    password: 123456
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.trust: "*"
 
 # MyBatis Plus配置
 mybatis-plus:
@@ -63,8 +76,8 @@ knife4j:
 # MinIO配置
 minio:
   endpoint: http://localshot:9000
-  access-key: admin
-  secret-key: Cyq15137217844@
+  access-key: minioadmin
+  secret-key: minioadmin
   bucket-name: user-uploads
 
 # JWT配置

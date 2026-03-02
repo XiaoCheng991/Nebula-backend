@@ -5,12 +5,10 @@ import com.nebula.common.util.JwtUtil;
 import com.nebula.config.constant.RedisConstant;
 import com.nebula.model.dto.GitHubOAuthDTO;
 import com.nebula.model.entity.SysUser;
-import com.nebula.model.entity.UserProfile;
 import com.nebula.model.vo.GitHubTokenResponse;
 import com.nebula.model.vo.GitHubUserInfo;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
-import com.nebula.service.mapper.UserProfileMapper;
 import com.nebula.service.service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +42,6 @@ public class OAuthServiceImpl implements OAuthService {
     private String redirectUri;
 
     private final SysUserMapper sysUserMapper;
-    private final UserProfileMapper userProfileMapper;
     private final PasswordEncoder passwordEncoder;
     private final RedisTemplate<String, Object> redisTemplate;
     private final RestTemplate restTemplate = new RestTemplate();
@@ -144,21 +141,11 @@ public class OAuthServiceImpl implements OAuthService {
             sysUser.setPassword(passwordEncoder.encode(UUID.randomUUID().toString())); // 随机密码
             sysUser.setEmail(githubUser.getEmail() != null ? githubUser.getEmail() : "github_" + githubUser.getId() + "@github.com");
             sysUser.setNickname(githubUser.getName() != null ? githubUser.getName() : githubUser.getLogin());
+            sysUser.setAvatarUrl(githubUser.getAvatarUrl());
+            sysUser.setBio(githubUser.getBio());
+            sysUser.setOnlineStatus("offline");
+            sysUser.setLastSeenAt(java.time.LocalDateTime.now());
             sysUserMapper.insert(sysUser);
-
-            // 创建用户档案
-            UserProfile profile = new UserProfile();
-            profile.setId(sysUser.getId());
-            profile.setUsername(sysUser.getUsername());
-            profile.setDisplayName(githubUser.getName() != null ? githubUser.getName() : githubUser.getLogin());
-            profile.setAvatarUrl(githubUser.getAvatarUrl());
-            profile.setBio(githubUser.getBio());
-            profile.setStatus("offline");
-            profile.setLastSeenAt(java.time.LocalDateTime.now());
-            profile.setCreateTime(java.time.LocalDateTime.now());
-            profile.setUpdateTime(java.time.LocalDateTime.now());
-            profile.setDeleted(0);
-            userProfileMapper.insert(profile);
         }
 
         return sysUser;
