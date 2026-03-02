@@ -130,4 +130,19 @@ public class JwtUtil {
     private static long getDefaultExpiration() {
         return 30 * 60 * 1000L;
     }
+
+    /**
+     * 从Token中获取用户ID
+     */
+    public static Long getUserIdFromToken(String token) {
+        Claims claims = parseToken(token);
+        Object userId = claims.get("userId");
+        if (userId == null) {
+            throw new IllegalArgumentException("Token中不包含用户ID");
+        }
+        if (userId instanceof Number) {
+            return ((Number) userId).longValue();
+        }
+        return Long.parseLong(userId.toString());
+    }
 }

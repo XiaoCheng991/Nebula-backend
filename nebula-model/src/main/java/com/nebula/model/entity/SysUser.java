@@ -7,9 +7,6 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
-/**
- * 系统用户实体
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_users")
@@ -35,9 +32,30 @@ public class SysUser extends BaseEntity {
     @Schema(description = "昵称")
     private String nickname;
 
-    @Schema(description = "状态（0-禁用，1-启用）")
-    private Integer status;
+    @Schema(description = "显示名称")
+    private String displayName;
+
+    @Schema(description = "头像文件名称")
+    private String avatarName;
+
+    @Schema(description = "头像在MinIO中的URL")
+    private String avatarUrl;
+
+    @Schema(description = "头像文件大小（字节）")
+    private Long avatarSize;
+
+    @Schema(description = "个人简介")
+    private String bio;
+
+    @Schema(description = "在线状态（online/offline/busy/away）")
+    private String onlineStatus;
+
+    @Schema(description = "账号状态（0-禁用，1-启用）")
+    private Integer accountStatus;
 
     @Schema(description = "最后登录时间")
     private LocalDateTime lastLoginAt;
+
+    @Schema(description = "最后活跃时间")
+    private LocalDateTime lastSeenAt;
 }

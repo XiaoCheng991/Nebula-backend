@@ -144,7 +144,6 @@ public class OAuthServiceImpl implements OAuthService {
             sysUser.setPassword(passwordEncoder.encode(UUID.randomUUID().toString())); // 随机密码
             sysUser.setEmail(githubUser.getEmail() != null ? githubUser.getEmail() : "github_" + githubUser.getId() + "@github.com");
             sysUser.setNickname(githubUser.getName() != null ? githubUser.getName() : githubUser.getLogin());
-            sysUser.setStatus(1);
             sysUserMapper.insert(sysUser);
 
             // 创建用户档案

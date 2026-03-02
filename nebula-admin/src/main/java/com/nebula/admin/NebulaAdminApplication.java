@@ -1,5 +1,6 @@
 package com.nebula.admin;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -8,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * NebulaAdmin启动类
  */
 @SpringBootApplication(scanBasePackages = "com.nebula")
+@MapperScan("com.nebula.service.mapper")
 @EnableFeignClients(basePackages = "com.nebula.api.feign")
 public class NebulaAdminApplication {
 

@@ -18,17 +18,17 @@ spring:
       # 是否启用文件上传
       enabled: true
 
-  # 数据源配置
+  # 数据源配置 (PostgreSQL)
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.235.149.73:3306/nebula?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localshot:5432/postgres
+    username: postgres
     password: 123456
 
   # Redis配置
   data:
     redis:
-      host: 49.235.149.73
+      host: localshot
       port: 6379
       password:
       database: 0
@@ -62,7 +62,7 @@ knife4j:
 
 # MinIO配置
 minio:
-  endpoint: http://49.235.149.73:9000
+  endpoint: http://localshot:9000
   access-key: admin
   secret-key: Cyq15137217844@
   bucket-name: user-uploads

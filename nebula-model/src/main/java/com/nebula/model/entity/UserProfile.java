@@ -17,8 +17,11 @@ import java.time.LocalDateTime;
 public class UserProfile extends BaseEntity {
 
     @TableId(type = IdType.AUTO)
-    @Schema(description = "用户ID")
+    @Schema(description = "档案ID")
     private Long id;
+
+    @Schema(description = "关联用户ID")
+    private Long userId;
 
     @Schema(description = "用户名")
     private String username;

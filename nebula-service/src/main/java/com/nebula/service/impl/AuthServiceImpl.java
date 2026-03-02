@@ -54,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 检查用户状态
-        if (sysUser.getStatus() == 0) {
+        if (sysUser.getAccountStatus() == 0) {
             LogUtil.Auth.loginFailed(log, loginDTO.getEmail(), "账号已被禁用");
             throw new BusinessException(ErrorCode.USER_DISABLED);
         }
@@ -190,7 +190,7 @@ public class AuthServiceImpl implements AuthService {
 
         // 查询用户信息
         SysUser sysUser = sysUserMapper.selectById(userId);
-        if (sysUser == null || sysUser.getDeleted() == 1 || sysUser.getStatus() == 0) {
+        if (sysUser == null || sysUser.getDeleted() == 1 || sysUser.getAccountStatus() == 0) {
             LogUtil.Auth.tokenRefreshFailed(log, "用户不存在或已被禁用");
             throw new BusinessException(ErrorCode.USER_NOT_FOUND);
         }
@@ -267,7 +267,7 @@ public class AuthServiceImpl implements AuthService {
         sysUser.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         sysUser.setEmail(registerDTO.getEmail());
         sysUser.setNickname(registerDTO.getNickname() != null ? registerDTO.getNickname() : registerDTO.getUsername());
-        sysUser.setStatus(1);
+        sysUser.setAccountStatus(1);
         return sysUser;
     }
 
