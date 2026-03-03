@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Result<?>> handleBusinessException(BusinessException e) {
         int httpStatus = e.getCode();
-        log.error("业务异常: code={}, httpStatus={}, message={}", e.getCode(), httpStatus, e.getMessage());
+        log.error("业务异常: code={}, httpStatus={}, message={}", e.getCode(), httpStatus, e.getMessage(), e);
 
         // 直接构建 Result 对象，避免循环依赖
         Result<?> result = Result.error(e.getCode(), e.getMessage());

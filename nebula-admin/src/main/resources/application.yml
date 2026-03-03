@@ -99,8 +99,8 @@ logging:
 
 # GitHub OAuth配置
 github:
-  client:
-    id: Ov23lisH1zy6aIiT5f9r
-    secret: 53fb8a6dd24bad3a37c40c8c37c76b9bd487521f
-  redirect:
-    uri: http://localhost:3000/auth/github/callback
+  oauth:
+    client-id: ${GITHUB_CLIENT_ID:}
+    client-secret: ${GITHUB_CLIENT_SECRET:}
+    redirect-uri: ${GITHUB_REDIRECT_URI:http://localhost:8080/api/oauth/github/callback}
+    frontend-callback-url: ${FRONTEND_CALLBACK_URL:http://localhost:3000/auth/github/callback}
