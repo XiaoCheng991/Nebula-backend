@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -51,17 +51,17 @@ public class LoginLogServiceImpl implements LoginLogService {
     }
 
     @Override
-    public int countFailedAttemptsByIp(String ipAddress, LocalDateTime since) {
+    public int countFailedAttemptsByIp(String ipAddress, OffsetDateTime since) {
         return loginLogMapper.countFailedAttemptsByIp(ipAddress, since);
     }
 
     @Override
-    public int countFailedAttemptsByUser(Long userId, LocalDateTime since) {
+    public int countFailedAttemptsByUser(Long userId, OffsetDateTime since) {
         return loginLogMapper.countFailedAttemptsByUser(userId, since);
     }
 
     @Override
-    public Map<String, Object> getLoginStatistics(LocalDateTime startTime, LocalDateTime endTime) {
+    public Map<String, Object> getLoginStatistics(OffsetDateTime startTime, OffsetDateTime endTime) {
         int totalCount = loginLogMapper.countByTimeRange(startTime, endTime);
         List<Map<String, Object>> typeStats = loginLogMapper.countByLoginType(startTime);
 
@@ -75,7 +75,7 @@ public class LoginLogServiceImpl implements LoginLogService {
     @Override
     @Scheduled(cron = "0 0 2 * * ?") // 每天凌晨2点执行
     public void cleanupOldLogs() {
-        LocalDateTime beforeTime = LocalDateTime.now().minusDays(LOG_RETENTION_DAYS);
+        OffsetDateTime beforeTime = OffsetDateTime.now().minusDays(LOG_RETENTION_DAYS);
         int count = loginLogMapper.cleanupOldLogs(beforeTime);
         log.info("清理登录日志: {} 条（{}天前的记录）", count, LOG_RETENTION_DAYS);
     }
@@ -91,8 +91,8 @@ public class LoginLogServiceImpl implements LoginLogService {
 
         LoginLog loginLog = loginLogMapper.selectOne(wrapper);
         if (loginLog != null) {
-            loginLog.setLogoutAt(LocalDateTime.now());
-            loginLog.setUpdateTime(LocalDateTime.now());
+            loginLog.setLogoutAt(OffsetDateTime.now());
+            loginLog.setUpdateTime(OffsetDateTime.now());
             loginLogMapper.updateById(loginLog);
         }
     }

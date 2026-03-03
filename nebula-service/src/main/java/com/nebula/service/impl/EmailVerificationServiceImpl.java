@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
         }
 
         // 2. 检查当日发送次数
-        LocalDateTime todayStart = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+        OffsetDateTime todayStart = OffsetDateTime.now().withHour(0).withMinute(0).withSecond(0);
         LambdaQueryWrapper<EmailVerification> countWrapper = new LambdaQueryWrapper<>();
         countWrapper.eq(EmailVerification::getUserId, user.getId())
                 .eq(EmailVerification::getType, type)
@@ -80,9 +80,9 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
         verification.setToken(token);
         verification.setType(type);
         verification.setStatus("pending");
-        verification.setExpiresAt(LocalDateTime.now().plusHours(TOKEN_EXPIRY_HOURS));
-        verification.setCreateTime(LocalDateTime.now());
-        verification.setUpdateTime(LocalDateTime.now());
+        verification.setExpiresAt(OffsetDateTime.now().plusHours(TOKEN_EXPIRY_HOURS));
+        verification.setCreateTime(OffsetDateTime.now());
+        verification.setUpdateTime(OffsetDateTime.now());
         verification.setDeleted(0);
 
         verificationMapper.insert(verification);
@@ -124,18 +124,18 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
         }
 
         // 检查是否过期
-        if (verification.getExpiresAt().isBefore(LocalDateTime.now())) {
+        if (verification.getExpiresAt().isBefore(OffsetDateTime.now())) {
             // 更新状态为过期
             verification.setStatus("expired");
-            verification.setUpdateTime(LocalDateTime.now());
+            verification.setUpdateTime(OffsetDateTime.now());
             verificationMapper.updateById(verification);
             throw new BusinessException(ResultCode.ERROR, "验证链接已过期，请重新申请");
         }
 
         // 更新验证状态
         verification.setStatus("verified");
-        verification.setVerifiedAt(LocalDateTime.now());
-        verification.setUpdateTime(LocalDateTime.now());
+        verification.setVerifiedAt(OffsetDateTime.now());
+        verification.setUpdateTime(OffsetDateTime.now());
         verificationMapper.updateById(verification);
 
         // 如果是注册验证，更新用户邮箱验证状态
@@ -173,7 +173,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
 
     @Override
     public void cleanupExpiredVerifications() {
-        LocalDateTime beforeTime = LocalDateTime.now().minusDays(7);
+        OffsetDateTime beforeTime = OffsetDateTime.now().minusDays(7);
         int count = verificationMapper.cleanupExpiredRecords(beforeTime);
         log.info("清理过期邮箱验证记录: {} 条", count);
     }

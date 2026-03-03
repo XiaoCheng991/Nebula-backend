@@ -3,7 +3,7 @@ package com.nebula.service.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.nebula.model.entity.LoginLog;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -35,17 +35,17 @@ public interface LoginLogService {
     /**
      * 统计IP失败尝试次数
      */
-    int countFailedAttemptsByIp(String ipAddress, LocalDateTime since);
+    int countFailedAttemptsByIp(String ipAddress, OffsetDateTime since);
 
     /**
      * 统计用户失败尝试次数
      */
-    int countFailedAttemptsByUser(Long userId, LocalDateTime since);
+    int countFailedAttemptsByUser(Long userId, OffsetDateTime since);
 
     /**
      * 获取登录统计
      */
-    Map<String, Object> getLoginStatistics(LocalDateTime startTime, LocalDateTime endTime);
+    Map<String, Object> getLoginStatistics(OffsetDateTime startTime, OffsetDateTime endTime);
 
     /**
      * 清理旧日志

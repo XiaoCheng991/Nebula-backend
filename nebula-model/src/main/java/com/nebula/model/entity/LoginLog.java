@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * 登录日志实体
@@ -56,10 +56,10 @@ public class LoginLog extends BaseEntity {
     private String device;
 
     @Schema(description = "登录时间")
-    private LocalDateTime loginAt;
+    private OffsetDateTime loginAt;
 
     @Schema(description = "登出时间")
-    private LocalDateTime logoutAt;
+    private OffsetDateTime logoutAt;
 
     @Schema(description = "令牌ID")
     private String tokenId;

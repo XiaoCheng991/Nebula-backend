@@ -5,7 +5,7 @@ package com.nebula.model.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 
 /**
@@ -46,8 +46,8 @@ public class UserVO {
     private String onlineStatus;
 
     @Schema(description = "最后活跃时间")
-    private LocalDateTime lastSeenAt;
+    private OffsetDateTime lastSeenAt;
 
     @Schema(description = "创建时间")
-    private LocalDateTime createTime;
+    private OffsetDateTime createTime;
 }

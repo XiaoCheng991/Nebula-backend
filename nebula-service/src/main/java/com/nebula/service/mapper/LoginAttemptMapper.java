@@ -5,13 +5,13 @@ import com.nebula.model.entity.LoginAttempt;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /**
@@ -42,7 +42,7 @@ public interface LoginAttemptMapper extends BaseMapper<LoginAttempt> {
      * 锁定账户
      */
     @Update("UPDATE login_attempts SET locked_until = #{lockedUntil}, update_time = NOW() WHERE id = #{id} AND deleted = 0")
-    int lockAccount(@Param("id") Long id, @Param("lockedUntil") LocalDateTime lockedUntil);
+    int lockAccount(@Param("id") Long id, @Param("lockedUntil") OffsetDateTime lockedUntil);
 
     /**
      * 清除锁定
@@ -54,5 +54,5 @@ public interface LoginAttemptMapper extends BaseMapper<LoginAttempt> {
      * 清理过期的锁定记录
      */
     @Update("UPDATE login_attempts SET deleted = 1 WHERE locked_until < #{beforeTime} AND deleted = 0")
-    int cleanupExpiredLocks(@Param("beforeTime") LocalDateTime beforeTime);
+    int cleanupExpiredLocks(@Param("beforeTime") OffsetDateTime beforeTime);
 }

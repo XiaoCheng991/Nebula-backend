@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /**
@@ -43,7 +43,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 
                 // 检查是否需要锁定
                 if (attempt.getAttemptCount() + 1 >= MAX_ATTEMPTS) {
-                    LocalDateTime lockedUntil = LocalDateTime.now().plusMinutes(LOCK_DURATION_MINUTES);
+                    OffsetDateTime lockedUntil = OffsetDateTime.now().plusMinutes(LOCK_DURATION_MINUTES);
                     loginAttemptMapper.lockAccount(attempt.getId(), lockedUntil);
                     log.warn("账户已锁定: username={}, ip={}, lockedUntil={}", username, ipAddress, lockedUntil);
                 }
@@ -55,9 +55,9 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
                 attempt.setUsername(username);
                 attempt.setIpAddress(ipAddress);
                 attempt.setAttemptCount(1);
-                attempt.setLastAttemptAt(LocalDateTime.now());
-                attempt.setCreateTime(LocalDateTime.now());
-                attempt.setUpdateTime(LocalDateTime.now());
+                attempt.setLastAttemptAt(OffsetDateTime.now());
+                attempt.setCreateTime(OffsetDateTime.now());
+                attempt.setUpdateTime(OffsetDateTime.now());
                 attempt.setDeleted(0);
 
                 loginAttemptMapper.insert(attempt);
@@ -71,7 +71,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
         Optional<LoginAttempt> ipLockOpt = loginAttemptMapper.findActiveLockByIp(ipAddress);
         if (ipLockOpt.isPresent()) {
             LoginAttempt lock = ipLockOpt.get();
-            if (lock.getLockedUntil().isAfter(LocalDateTime.now())) {
+            if (lock.getLockedUntil().isAfter(OffsetDateTime.now())) {
                 log.warn("IP已被锁定: ip={}, lockedUntil={}", ipAddress, lock.getLockedUntil());
                 return true;
             }
@@ -81,7 +81,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
         Optional<LoginAttempt> attemptOpt = loginAttemptMapper.findByUsernameAndIp(username, ipAddress);
         if (attemptOpt.isPresent()) {
             LoginAttempt attempt = attemptOpt.get();
-            if (attempt.getLockedUntil() != null && attempt.getLockedUntil().isAfter(LocalDateTime.now())) {
+            if (attempt.getLockedUntil() != null && attempt.getLockedUntil().isAfter(OffsetDateTime.now())) {
                 log.warn("账户已被锁定: username={}, lockedUntil={}", username, attempt.getLockedUntil());
                 return true;
             }
@@ -90,9 +90,9 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
             if (attempt.getAttemptCount() >= MAX_ATTEMPTS) {
                 // 检查是否在时间窗口内
                 if (attempt.getLastAttemptAt() != null &&
-                        attempt.getLastAttemptAt().isAfter(LocalDateTime.now().minusMinutes(ATTEMPT_WINDOW_MINUTES))) {
+                        attempt.getLastAttemptAt().isAfter(OffsetDateTime.now().minusMinutes(ATTEMPT_WINDOW_MINUTES))) {
                     // 锁定账户
-                    LocalDateTime lockedUntil = LocalDateTime.now().plusMinutes(LOCK_DURATION_MINUTES);
+                    OffsetDateTime lockedUntil = OffsetDateTime.now().plusMinutes(LOCK_DURATION_MINUTES);
                     loginAttemptMapper.lockAccount(attempt.getId(), lockedUntil);
                     log.warn("账户已锁定: username={}, lockedUntil={}", username, lockedUntil);
                     return true;
@@ -128,7 +128,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
     @Override
     @Scheduled(cron = "0 0 3 * * ?") // 每天凌晨3点执行
     public void cleanupExpiredLocks() {
-        LocalDateTime beforeTime = LocalDateTime.now().minusDays(7);
+        OffsetDateTime beforeTime = OffsetDateTime.now().minusDays(7);
         int count = loginAttemptMapper.cleanupExpiredLocks(beforeTime);
         log.info("清理过期锁定记录: {} 条", count);
     }

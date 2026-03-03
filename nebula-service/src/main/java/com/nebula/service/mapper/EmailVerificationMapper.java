@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /**
@@ -37,5 +37,5 @@ public interface EmailVerificationMapper extends BaseMapper<EmailVerification> {
      * 清理过期的验证记录
      */
     @Select("UPDATE email_verifications SET deleted = 1 WHERE status = 'expired' AND expires_at < #{beforeTime} AND deleted = 0")
-    int cleanupExpiredRecords(@Param("beforeTime") LocalDateTime beforeTime);
+    int cleanupExpiredRecords(@Param("beforeTime") OffsetDateTime beforeTime);
 }

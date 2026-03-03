@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -54,8 +54,8 @@ public class SysUser extends BaseEntity {
     private Integer accountStatus;
 
     @Schema(description = "最后登录时间")
-    private LocalDateTime lastLoginAt;
+    private OffsetDateTime lastLoginAt;
 
     @Schema(description = "最后活跃时间")
-    private LocalDateTime lastSeenAt;
+    private OffsetDateTime lastSeenAt;
 }

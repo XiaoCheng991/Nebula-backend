@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * 密码重置令牌实体
@@ -35,10 +35,10 @@ public class PasswordResetToken extends BaseEntity {
     private String status;
 
     @Schema(description = "使用时间")
-    private LocalDateTime usedAt;
+    private OffsetDateTime usedAt;
 
     @Schema(description = "过期时间")
-    private LocalDateTime expiresAt;
+    private OffsetDateTime expiresAt;
 
     @Schema(description = "请求IP")
     private String ipAddress;

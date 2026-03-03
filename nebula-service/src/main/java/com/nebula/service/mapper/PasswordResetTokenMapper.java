@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /**
@@ -43,5 +43,5 @@ public interface PasswordResetTokenMapper extends BaseMapper<PasswordResetToken>
      * 清理过期的令牌记录
      */
     @Select("UPDATE password_reset_tokens SET deleted = 1 WHERE status IN ('used', 'expired') AND update_time < #{beforeTime} AND deleted = 0")
-    int cleanupOldRecords(@Param("beforeTime") LocalDateTime beforeTime);
+    int cleanupOldRecords(@Param("beforeTime") OffsetDateTime beforeTime);
 }

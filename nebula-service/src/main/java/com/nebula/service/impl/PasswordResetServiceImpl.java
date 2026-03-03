@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,7 +59,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         }
 
         // 2. 检查当日请求次数
-        LocalDateTime todayStart = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+        OffsetDateTime todayStart = OffsetDateTime.now().withHour(0).withMinute(0).withSecond(0);
         LambdaQueryWrapper<PasswordResetToken> countWrapper = new LambdaQueryWrapper<>();
         countWrapper.eq(PasswordResetToken::getUserId, user.getId())
                 .ge(PasswordResetToken::getCreateTime, todayStart);
@@ -86,11 +86,11 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         resetToken.setEmail(email);
         resetToken.setToken(token);
         resetToken.setStatus("pending");
-        resetToken.setExpiresAt(LocalDateTime.now().plusHours(TOKEN_EXPIRY_HOURS));
+        resetToken.setExpiresAt(OffsetDateTime.now().plusHours(TOKEN_EXPIRY_HOURS));
         resetToken.setIpAddress(ipAddress);
         resetToken.setUserAgent(userAgent);
-        resetToken.setCreateTime(LocalDateTime.now());
-        resetToken.setUpdateTime(LocalDateTime.now());
+        resetToken.setCreateTime(OffsetDateTime.now());
+        resetToken.setUpdateTime(OffsetDateTime.now());
         resetToken.setDeleted(0);
 
         tokenMapper.insert(resetToken);
@@ -117,7 +117,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         }
 
         // 检查是否过期
-        if (resetToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+        if (resetToken.getExpiresAt().isBefore(OffsetDateTime.now())) {
             return false;
         }
 
@@ -151,7 +151,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         }
 
         // 4. 检查是否过期
-        if (resetToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+        if (resetToken.getExpiresAt().isBefore(OffsetDateTime.now())) {
             throw new BusinessException(ResultCode.ERROR, "重置链接已过期，请重新申请");
         }
 
@@ -162,7 +162,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));
-        user.setUpdateTime(java.time.LocalDateTime.now());
+        user.setUpdateTime(java.time.OffsetDateTime.now());
         userMapper.updateById(user);
 
         // 6. 标记令牌为已使用
@@ -173,7 +173,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
 
     @Override
     public void cleanupExpiredTokens() {
-        LocalDateTime beforeTime = LocalDateTime.now().minusDays(7);
+        OffsetDateTime beforeTime = OffsetDateTime.now().minusDays(7);
         int count = tokenMapper.cleanupOldRecords(beforeTime);
         log.info("清理过期密码重置令牌: {} 条", count);
     }

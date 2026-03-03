@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * 用户档案控制器
@@ -76,7 +76,7 @@ public class ProfileController {
             sysUser.setNickname(profileVO.getDisplayName());
             sysUser.setAvatarUrl(profileVO.getAvatar());
             sysUser.setBio(profileVO.getBio());
-            sysUser.setUpdateTime(LocalDateTime.now());
+            sysUser.setUpdateTime(OffsetDateTime.now());
             sysUserMapper.updateById(sysUser);
 
             log.info("更新用户档案成功: userId={}", userInfo.getId());
@@ -106,7 +106,7 @@ public class ProfileController {
 
             // 更新用户头像字段
             sysUser.setAvatarUrl(avatarRequest.getAvatarUrl());
-            sysUser.setUpdateTime(LocalDateTime.now());
+            sysUser.setUpdateTime(OffsetDateTime.now());
             sysUserMapper.updateById(sysUser);
 
             log.info("更新用户头像成功: userId={}, avatarUrl={}",

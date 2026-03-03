@@ -74,6 +74,52 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 运行时异常 - 可能包含业务错误消息
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Result<?>> handleRuntimeException(RuntimeException e) {
+        String message = e.getMessage();
+
+        // 检查是否是业务错误消息（通常包含特定的中文关键词）
+        if (isBusinessErrorMessage(message)) {
+            log.warn("业务运行时异常: {}", message);
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Result.error(message));
+        }
+
+        // 其他运行时异常按系统异常处理
+        log.error("运行时异常: {}", message, e);
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Result.error("系统异常，请联系管理员"));
+    }
+
+    /**
+     * 判断是否是业务错误消息
+     */
+    private boolean isBusinessErrorMessage(String message) {
+        if (message == null || message.isEmpty()) {
+            return false;
+        }
+
+        // 业务错误关键词
+        String[] businessKeywords = {
+            "不存在", "已存在", "错误", "失败", "无效", "不合法",
+            "不正确", "已过期", "已被", "不能", "不允许",
+            "为空", "必填", "格式", "长度", "范围"
+        };
+
+        for (String keyword : businessKeywords) {
+            if (message.contains(keyword)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * 系统异常
      */
     @ExceptionHandler(Exception.class)

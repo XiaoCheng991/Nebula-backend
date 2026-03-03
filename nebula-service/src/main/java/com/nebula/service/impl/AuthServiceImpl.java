@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
         tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
 
         // 更新最后登录时间
-        sysUser.setLastLoginAt(LocalDateTime.now());
+        sysUser.setLastLoginAt(OffsetDateTime.now());
         sysUserMapper.updateById(sysUser);
         LogUtil.Database.update(log, "sys_user", sysUser.getId());
 

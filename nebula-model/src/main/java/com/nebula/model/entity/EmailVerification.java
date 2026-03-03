@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * 邮箱验证实体
@@ -38,8 +38,8 @@ public class EmailVerification extends BaseEntity {
     private String status;
 
     @Schema(description = "验证时间")
-    private LocalDateTime verifiedAt;
+    private OffsetDateTime verifiedAt;
 
     @Schema(description = "过期时间")
-    private LocalDateTime expiresAt;
+    private OffsetDateTime expiresAt;
 }

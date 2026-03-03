@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * 登录尝试实体（防止暴力破解）
@@ -32,8 +32,8 @@ public class LoginAttempt extends BaseEntity {
     private Integer attemptCount;
 
     @Schema(description = "最后尝试时间")
-    private LocalDateTime lastAttemptAt;
+    private OffsetDateTime lastAttemptAt;
 
     @Schema(description = "锁定至")
-    private LocalDateTime lockedUntil;
+    private OffsetDateTime lockedUntil;
 }

@@ -144,7 +144,7 @@ public class OAuthServiceImpl implements OAuthService {
             sysUser.setAvatarUrl(githubUser.getAvatarUrl());
             sysUser.setBio(githubUser.getBio());
             sysUser.setOnlineStatus("offline");
-            sysUser.setLastSeenAt(java.time.LocalDateTime.now());
+            sysUser.setLastSeenAt(java.time.OffsetDateTime.now());
             sysUserMapper.insert(sysUser);
         }
 
