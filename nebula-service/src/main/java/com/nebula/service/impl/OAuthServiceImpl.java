@@ -25,6 +25,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class OAuthServiceImpl implements OAuthService {
     private final TokenStorageService tokenStorageService;
     private final GitHubOAuthProperties gitHubOAuthProperties;
     private final JwtProperties jwtProperties;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -229,7 +230,7 @@ public class OAuthServiceImpl implements OAuthService {
         try {
             String redirectUriEncoded = java.net.URLEncoder.encode(
                 gitHubOAuthProperties.getRedirectUri(),
-                "UTF-8"
+                    StandardCharsets.UTF_8
             );
 
             return String.format(
@@ -240,7 +241,7 @@ public class OAuthServiceImpl implements OAuthService {
                 state
             );
         } catch (Exception e) {
-            log.error("生成GitHub授权URL失败", e);
+            log.error("生成 GitHub授权URL失败", e);
             throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "生成授权URL失败");
         }
     }

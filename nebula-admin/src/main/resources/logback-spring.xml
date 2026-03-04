@@ -2,6 +2,9 @@
 <configuration>
     <contextName>nebula-admin</contextName>
 
+    <!-- 从 application.yml 读取自定义配置 -->
+    <springProperty scope="context" name="APP_LOGGING_FILE_ENABLED" source="app.logging.file.enabled" defaultValue="true"/>
+
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
