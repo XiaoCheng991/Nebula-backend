@@ -1,6 +1,7 @@
 package com.nebula.api.controller;
 
 import com.nebula.common.util.JwtUtil;
+import com.nebula.config.config.JwtProperties;
 import com.nebula.config.result.Result;
 import com.nebula.model.dto.EmailVerificationDTO;
 import com.nebula.model.dto.SendEmailVerificationDTO;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class EmailVerificationController {
 
     private final EmailVerificationService emailVerificationService;
+    private final JwtProperties jwtProperties;
 
     @PostMapping("/send-verification")
     @Operation(summary = "发送邮箱验证邮件", description = "向指定邮箱发送验证邮件")
@@ -96,7 +98,7 @@ public class EmailVerificationController {
         }
         token = token.substring(7);
         try {
-            return JwtUtil.getUserIdFromToken(token);
+            return JwtUtil.getUserIdFromToken(token, jwtProperties.getSecret());
         } catch (Exception e) {
             return null;
         }

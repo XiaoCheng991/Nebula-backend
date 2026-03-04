@@ -15,18 +15,6 @@ import java.util.Map;
 public class JwtUtil {
 
     /**
-     * 默认密钥（生产环境应从配置文件读取）
-     */
-    private static final String DEFAULT_SECRET = "nebula-secret-key-2024-spring-boot-jwt-token-refresh-enabled";
-
-    /**
-     * 生成JWT（使用默认过期时间）
-     */
-    public static String generateToken(Map<String, Object> claims) {
-        return generateToken(claims, DEFAULT_SECRET, getDefaultExpiration());
-    }
-
-    /**
      * 生成Access Token（短期）
      */
     public static String generateAccessToken(Map<String, Object> claims, String secret, Long expiration) {
@@ -68,13 +56,6 @@ public class JwtUtil {
     /**
      * 解析JWT
      */
-    public static Claims parseToken(String token) {
-        return parseToken(token, DEFAULT_SECRET);
-    }
-
-    /**
-     * 解析JWT
-     */
     public static Claims parseToken(String token, String secret) {
         // 清理token：移除前后空格和 "Bearer " 前缀
         if (token == null || token.trim().isEmpty()) {
@@ -100,42 +81,10 @@ public class JwtUtil {
     }
 
     /**
-     * 验证JWT
-     */
-    public static boolean validateToken(String token) {
-        try {
-            parseToken(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
-     * 验证JWT是否过期
-     */
-    public static boolean isTokenExpired(String token) {
-        try {
-            Claims claims = parseToken(token);
-            Date expiration = claims.getExpiration();
-            return expiration.before(new Date());
-        } catch (Exception e) {
-            return true;
-        }
-    }
-
-    /**
-     * 获取默认过期时间（30分钟）
-     */
-    private static long getDefaultExpiration() {
-        return 30 * 60 * 1000L;
-    }
-
-    /**
      * 从Token中获取用户ID
      */
-    public static Long getUserIdFromToken(String token) {
-        Claims claims = parseToken(token);
+    public static Long getUserIdFromToken(String token, String secret) {
+        Claims claims = parseToken(token, secret);
         Object userId = claims.get("userId");
         if (userId == null) {
             throw new IllegalArgumentException("Token中不包含用户ID");

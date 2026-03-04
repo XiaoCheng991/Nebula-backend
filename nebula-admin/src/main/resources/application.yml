@@ -90,6 +90,7 @@ jwt:
   refresh-token-expiration: 604800000
 
 # 日志配置
+# 如需禁用文件日志输出，启动时添加 Spring Profile: --spring.profiles.active=no-file-log
 logging:
   level:
     com.nebula: debug

@@ -26,10 +26,18 @@
         </encoder>
     </appender>
 
+    <!-- 默认配置 - 启用文件日志 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
+
+    <!-- no-file-log Profile - 仅控制台输出 -->
+    <springProfile name="no-file-log">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
 
     <logger name="com.nebula" level="DEBUG"/>
 </configuration>

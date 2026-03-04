@@ -2,6 +2,7 @@ package com.nebula.api.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.nebula.common.util.JwtUtil;
+import com.nebula.config.config.JwtProperties;
 import com.nebula.config.result.Result;
 import com.nebula.model.vo.UserVO;
 import com.nebula.service.service.UserSearchService;
@@ -29,6 +30,7 @@ import java.util.List;
 public class UserSearchController {
 
     private final UserSearchService userSearchService;
+    private final JwtProperties jwtProperties;
 
     @GetMapping("/search")
     @Operation(summary = "搜索用户", description = "根据关键词搜索用户，支持用户名、昵称、邮箱搜索",
@@ -106,7 +108,7 @@ public class UserSearchController {
         }
         token = token.substring(7);
         try {
-            return JwtUtil.getUserIdFromToken(token);
+            return JwtUtil.getUserIdFromToken(token, jwtProperties.getSecret());
         } catch (Exception e) {
             return null;
         }

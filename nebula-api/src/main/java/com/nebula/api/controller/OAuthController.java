@@ -68,10 +68,14 @@ public class OAuthController {
             if (state != null && !state.isEmpty()) {
                 String stateKey = GITHUB_STATE_PREFIX + state;
                 String stateValue = (String) redisTemplate.opsForValue().get(stateKey);
-                if (stateValue != null) {
-                    redisTemplate.delete(stateKey);
-                    log.debug("GitHub OAuth state验证通过: {}", state);
+                if (stateValue == null) {
+                    log.error("GitHub OAuth state验证失败: {}", state);
+                    response.sendRedirect(gitHubOAuthProperties.getFrontendCallbackUrl() + "?error=invalid_state");
+                    return;
                 }
+                // 验证通过后删除state，防止重复使用
+                redisTemplate.delete(stateKey);
+                log.debug("GitHub OAuth state验证通过: {}", state);
             }
 
             GitHubOAuthDTO oauthDTO = new GitHubOAuthDTO();
