@@ -1,6 +1,7 @@
 -- ============================================
 -- Phase 1: 基础设施与核心认证 - 数据库迁移
 -- 包含: 邮箱验证、密码重置、登录日志
+-- 注意: 使用逻辑外键，不使用物理外键
 -- ============================================
 
 -- ============================================
@@ -8,7 +9,7 @@
 -- ============================================
 CREATE TABLE IF NOT EXISTS email_verifications (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    user_id BIGINT NOT NULL,
     email VARCHAR(100) NOT NULL,
     token VARCHAR(255) NOT NULL,
     type VARCHAR(20) NOT NULL CHECK (type IN ('registration', 'email_change', 'password_reset')),
@@ -27,7 +28,7 @@ CREATE INDEX IF NOT EXISTS idx_email_verifications_expires ON email_verification
 
 COMMENT ON TABLE email_verifications IS '邮箱验证令牌表';
 COMMENT ON COLUMN email_verifications.id IS '验证ID';
-COMMENT ON COLUMN email_verifications.user_id IS '用户ID';
+COMMENT ON COLUMN email_verifications.user_id IS '用户ID（逻辑外键）';
 COMMENT ON COLUMN email_verifications.email IS '邮箱地址';
 COMMENT ON COLUMN email_verifications.token IS '验证令牌';
 COMMENT ON COLUMN email_verifications.type IS '验证类型(registration-注册验证,email_change-邮箱修改,password_reset-密码重置)';
@@ -45,7 +46,7 @@ CREATE TRIGGER update_email_verifications_updated_at
 -- ============================================
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    user_id BIGINT NOT NULL,
     email VARCHAR(100) NOT NULL,
     token VARCHAR(255) NOT NULL,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'used', 'expired')),
@@ -65,7 +66,7 @@ CREATE INDEX IF NOT EXISTS idx_password_reset_expires ON password_reset_tokens(e
 
 COMMENT ON TABLE password_reset_tokens IS '密码重置令牌表';
 COMMENT ON COLUMN password_reset_tokens.id IS '令牌ID';
-COMMENT ON COLUMN password_reset_tokens.user_id IS '用户ID';
+COMMENT ON COLUMN password_reset_tokens.user_id IS '用户ID（逻辑外键）';
 COMMENT ON COLUMN password_reset_tokens.email IS '邮箱地址';
 COMMENT ON COLUMN password_reset_tokens.token IS '重置令牌';
 COMMENT ON COLUMN password_reset_tokens.status IS '状态(pending-待使用,used-已使用,expired-已过期)';
@@ -84,7 +85,7 @@ CREATE TRIGGER update_password_reset_updated_at
 -- ============================================
 CREATE TABLE IF NOT EXISTS login_logs (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT REFERENCES sys_users(id) ON DELETE SET NULL,
+    user_id BIGINT,
     username VARCHAR(50),
     login_type VARCHAR(20) NOT NULL CHECK (login_type IN ('password', 'github', 'google', 'wechat')),
     status VARCHAR(20) NOT NULL CHECK (status IN ('success', 'failed', 'locked')),
@@ -112,7 +113,7 @@ CREATE INDEX IF NOT EXISTS idx_login_logs_login_at ON login_logs(login_at DESC);
 
 COMMENT ON TABLE login_logs IS '登录日志表';
 COMMENT ON COLUMN login_logs.id IS '日志ID';
-COMMENT ON COLUMN login_logs.user_id IS '用户ID';
+COMMENT ON COLUMN login_logs.user_id IS '用户ID（逻辑外键）';
 COMMENT ON COLUMN login_logs.username IS '用户名';
 COMMENT ON COLUMN login_logs.login_type IS '登录类型(password-密码,github-GitHub,google-谷歌,wechat-微信)';
 COMMENT ON COLUMN login_logs.status IS '状态(success-成功,failed-失败,locked-锁定)';

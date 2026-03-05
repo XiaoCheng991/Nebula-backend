@@ -68,7 +68,17 @@ public enum ErrorCode {
     OPERATION_NOT_ALLOWED(9001, "不允许执行此操作"),
     RESOURCE_NOT_FOUND(9002, "资源不存在"),
     PERMISSION_DENIED(9003, "权限不足"),
-    DUPLICATE_OPERATION(9004, "请勿重复操作");
+    DUPLICATE_OPERATION(9004, "请勿重复操作"),
+
+    // 权限相关错误 10xxx
+    ROLE_NOT_FOUND(10001, "角色不存在"),
+    MENU_NOT_FOUND(10002, "菜单不存在"),
+    CANNOT_DELETE_SYSTEM_ROLE(10003, "系统内置角色不可删除"),
+    CANNOT_DELETE_SYSTEM_MENU(10004, "系统内置菜单不可删除"),
+    CANNOT_MODIFY_SUPER_ADMIN(10005, "无法修改超级管理员"),
+    USER_ALREADY_HAS_ROLE(10006, "用户已拥有该角色"),
+    DICT_TYPE_NOT_FOUND(10007, "字典类型不存在"),
+    DICT_ITEM_NOT_FOUND(10008, "字典项不存在");
 
     /**
      * 错误码

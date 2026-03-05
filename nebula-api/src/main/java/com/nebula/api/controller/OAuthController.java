@@ -3,12 +3,15 @@ package com.nebula.api.controller;
 import com.nebula.common.exception.BusinessException;
 import com.nebula.config.properties.GitHubOAuthProperties;
 import com.nebula.config.result.Result;
+import com.nebula.model.dto.GitHubOAuthConfirmDTO;
 import com.nebula.model.dto.GitHubOAuthDTO;
+import com.nebula.model.vo.GitHubOAuthConfirmVO;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.service.OAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -55,7 +58,7 @@ public class OAuthController {
     }
 
     @GetMapping("/github/callback")
-    @Operation(summary = "GitHub OAuth回调")
+    @Operation(summary = "GitHub OAuth回调 - 返回确认信息")
     public void handleGitHubCallback(
             @RequestParam("code") String code,
             @RequestParam(value = "state", required = false) String state,
@@ -82,16 +85,17 @@ public class OAuthController {
             oauthDTO.setCode(code);
             oauthDTO.setState(state);
 
-            LoginVO loginVO = oAuthService.handleGitHubCallback(oauthDTO);
+            // 获取确认信息（不直接登录）
+            GitHubOAuthConfirmVO confirmVO = oAuthService.handleGitHubCallbackForConfirm(oauthDTO);
 
-            // 重定向到前端，携带 accessToken 和 refreshToken
+            // 重定向到前端确认页面，携带临时token
             String frontendUrl = String.format(
-                "%s?token=%s&refreshToken=%s",
+                "%s?tempToken=%s&githubId=%s",
                 gitHubOAuthProperties.getFrontendCallbackUrl(),
-                loginVO.getToken(),
-                loginVO.getRefreshToken()
+                confirmVO.getTempToken(),
+                confirmVO.getGithubId()
             );
-            log.info("GitHub OAuth登录成功, 重定向到: {}", frontendUrl);
+            log.info("GitHub OAuth回调成功, 重定向到确认页面: {}", frontendUrl);
             response.sendRedirect(frontendUrl);
 
         } catch (BusinessException e) {
@@ -101,5 +105,21 @@ public class OAuthController {
             log.error("GitHub OAuth回调处理失败", e);
             response.sendRedirect(gitHubOAuthProperties.getFrontendCallbackUrl() + "?error=server_error");
         }
+    }
+
+    @GetMapping("/github/info")
+    @Operation(summary = "用临时token获取GitHub用户信息")
+    public Result<GitHubOAuthConfirmVO> getGitHubUserInfo(@RequestParam("tempToken") String tempToken) {
+        log.info("获取GitHub用户信息请求, tempToken: {}", tempToken);
+        GitHubOAuthConfirmVO confirmVO = oAuthService.getGitHubUserInfo(tempToken);
+        return Result.success(confirmVO);
+    }
+
+    @PostMapping("/github/confirm")
+    @Operation(summary = "确认GitHub OAuth登录")
+    public Result<LoginVO> confirmGitHubLogin(@Valid @RequestBody GitHubOAuthConfirmDTO confirmDTO) {
+        log.info("收到GitHub OAuth确认登录请求");
+        LoginVO loginVO = oAuthService.confirmGitHubLogin(confirmDTO);
+        return Result.success("登录成功", loginVO);
     }
 }

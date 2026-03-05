@@ -2,6 +2,7 @@
 -- NebulaHub 数据库 Schema (PostgreSQL)
 -- 支持: IM聊天、群组/私聊、文件上传、好友关系
 -- 适配: Spring Boot 3.2.2 + MyBatis-Plus 3.5.5
+-- 注意: 使用逻辑外键，不使用物理外键
 -- ============================================
 
 -- ⚠️ 重要：执行前请先备份现有数据
@@ -93,7 +94,7 @@ CREATE TABLE IF NOT EXISTS chat_rooms (
     description TEXT,
     type VARCHAR(20) NOT NULL CHECK (type IN ('direct', 'group')),
     avatar_url TEXT,
-    created_by BIGINT REFERENCES sys_users(id) ON DELETE SET NULL,
+    created_by BIGINT,
     last_message_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     create_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     update_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -110,7 +111,7 @@ COMMENT ON COLUMN chat_rooms.name IS '聊天室名称';
 COMMENT ON COLUMN chat_rooms.description IS '聊天室描述';
 COMMENT ON COLUMN chat_rooms.type IS '类型（direct-私聊，group-群聊）';
 COMMENT ON COLUMN chat_rooms.avatar_url IS '头像URL';
-COMMENT ON COLUMN chat_rooms.created_by IS '创建者ID';
+COMMENT ON COLUMN chat_rooms.created_by IS '创建者ID（逻辑外键）';
 COMMENT ON COLUMN chat_rooms.last_message_at IS '最后消息时间';
 COMMENT ON COLUMN chat_rooms.create_time IS '创建时间';
 COMMENT ON COLUMN chat_rooms.update_time IS '更新时间';
@@ -127,8 +128,8 @@ CREATE TRIGGER update_chat_rooms_updated_at
 
 CREATE TABLE IF NOT EXISTS room_members (
     id BIGSERIAL PRIMARY KEY,
-    room_id BIGINT NOT NULL REFERENCES chat_rooms(id) ON DELETE CASCADE,
-    user_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    room_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     role VARCHAR(20) DEFAULT 'member' CHECK (role IN ('owner', 'admin', 'member')),
     joined_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     left_at TIMESTAMP WITH TIME ZONE,
@@ -143,8 +144,8 @@ CREATE INDEX IF NOT EXISTS idx_room_members_user ON room_members(user_id);
 
 COMMENT ON TABLE room_members IS '聊天室成员表';
 COMMENT ON COLUMN room_members.id IS '成员记录ID';
-COMMENT ON COLUMN room_members.room_id IS '聊天室ID';
-COMMENT ON COLUMN room_members.user_id IS '用户ID';
+COMMENT ON COLUMN room_members.room_id IS '聊天室ID（逻辑外键）';
+COMMENT ON COLUMN room_members.user_id IS '用户ID（逻辑外键）';
 COMMENT ON COLUMN room_members.role IS '角色（owner-所有者，admin-管理员，member-成员）';
 COMMENT ON COLUMN room_members.joined_at IS '加入时间';
 COMMENT ON COLUMN room_members.left_at IS '离开时间';
@@ -163,8 +164,8 @@ CREATE TRIGGER update_room_members_updated_at
 
 CREATE TABLE IF NOT EXISTS messages (
     id BIGSERIAL PRIMARY KEY,
-    room_id BIGINT NOT NULL REFERENCES chat_rooms(id) ON DELETE CASCADE,
-    sender_id BIGINT REFERENCES sys_users(id) ON DELETE SET NULL,
+    room_id BIGINT NOT NULL,
+    sender_id BIGINT,
     content TEXT,
     message_type VARCHAR(20) DEFAULT 'text' CHECK (message_type IN ('text', 'image', 'file', 'system')),
     file_url TEXT,
@@ -172,7 +173,7 @@ CREATE TABLE IF NOT EXISTS messages (
     file_size BIGINT,
     image_width INTEGER,
     image_height INTEGER,
-    reply_to_id BIGINT REFERENCES messages(id) ON DELETE SET NULL,
+    reply_to_id BIGINT,
     mentioned_users BIGINT[] DEFAULT '{}',
     is_edited BOOLEAN DEFAULT FALSE,
     is_deleted BOOLEAN DEFAULT FALSE,
@@ -188,8 +189,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_create_time ON messages(create_time DESC
 
 COMMENT ON TABLE messages IS '消息表';
 COMMENT ON COLUMN messages.id IS '消息ID';
-COMMENT ON COLUMN messages.room_id IS '聊天室ID';
-COMMENT ON COLUMN messages.sender_id IS '发送者ID';
+COMMENT ON COLUMN messages.room_id IS '聊天室ID（逻辑外键）';
+COMMENT ON COLUMN messages.sender_id IS '发送者ID（逻辑外键）';
 COMMENT ON COLUMN messages.content IS '消息内容';
 COMMENT ON COLUMN messages.message_type IS '消息类型（text-文本，image-图片，file-文件，system-系统）';
 COMMENT ON COLUMN messages.file_url IS '文件URL';
@@ -197,7 +198,7 @@ COMMENT ON COLUMN messages.file_name IS '文件名';
 COMMENT ON COLUMN messages.file_size IS '文件大小';
 COMMENT ON COLUMN messages.image_width IS '图片宽度';
 COMMENT ON COLUMN messages.image_height IS '图片高度';
-COMMENT ON COLUMN messages.reply_to_id IS '回复的消息ID';
+COMMENT ON COLUMN messages.reply_to_id IS '回复的消息ID（逻辑外键）';
 COMMENT ON COLUMN messages.mentioned_users IS '@提及的用户ID数组';
 COMMENT ON COLUMN messages.is_edited IS '是否已编辑';
 COMMENT ON COLUMN messages.is_deleted IS '是否已删除';
@@ -232,8 +233,8 @@ CREATE TRIGGER trigger_update_room_last_message
 
 CREATE TABLE IF NOT EXISTS message_reads (
     id BIGSERIAL PRIMARY KEY,
-    message_id BIGINT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-    user_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    message_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     read_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     create_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     update_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -246,8 +247,8 @@ CREATE INDEX IF NOT EXISTS idx_message_reads_message ON message_reads(message_id
 
 COMMENT ON TABLE message_reads IS '消息已读状态表';
 COMMENT ON COLUMN message_reads.id IS '记录ID';
-COMMENT ON COLUMN message_reads.message_id IS '消息ID';
-COMMENT ON COLUMN message_reads.user_id IS '用户ID';
+COMMENT ON COLUMN message_reads.message_id IS '消息ID（逻辑外键）';
+COMMENT ON COLUMN message_reads.user_id IS '用户ID（逻辑外键）';
 COMMENT ON COLUMN message_reads.read_at IS '已读时间';
 COMMENT ON COLUMN message_reads.create_time IS '创建时间';
 COMMENT ON COLUMN message_reads.update_time IS '更新时间';
@@ -264,8 +265,8 @@ CREATE TRIGGER update_message_reads_updated_at
 
 CREATE TABLE IF NOT EXISTS friend_requests (
     id BIGSERIAL PRIMARY KEY,
-    sender_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
-    receiver_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    sender_id BIGINT NOT NULL,
+    receiver_id BIGINT NOT NULL,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'rejected')),
     message TEXT,
     create_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -280,8 +281,8 @@ CREATE INDEX IF NOT EXISTS idx_friend_requests_status ON friend_requests(status)
 
 COMMENT ON TABLE friend_requests IS '好友请求表';
 COMMENT ON COLUMN friend_requests.id IS '请求ID';
-COMMENT ON COLUMN friend_requests.sender_id IS '发送者ID';
-COMMENT ON COLUMN friend_requests.receiver_id IS '接收者ID';
+COMMENT ON COLUMN friend_requests.sender_id IS '发送者ID（逻辑外键）';
+COMMENT ON COLUMN friend_requests.receiver_id IS '接收者ID（逻辑外键）';
 COMMENT ON COLUMN friend_requests.status IS '状态（pending-待处理，accepted-已接受，rejected-已拒绝）';
 COMMENT ON COLUMN friend_requests.message IS '请求消息';
 COMMENT ON COLUMN friend_requests.create_time IS '创建时间';
@@ -299,8 +300,8 @@ CREATE TRIGGER update_friend_requests_updated_at
 
 CREATE TABLE IF NOT EXISTS friends (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
-    friend_id BIGINT NOT NULL REFERENCES sys_users(id) ON DELETE CASCADE,
+    user_id BIGINT NOT NULL,
+    friend_id BIGINT NOT NULL,
     create_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     update_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     deleted INTEGER DEFAULT 0,
@@ -312,8 +313,8 @@ CREATE INDEX IF NOT EXISTS idx_friends_friend ON friends(friend_id);
 
 COMMENT ON TABLE friends IS '好友关系表';
 COMMENT ON COLUMN friends.id IS '关系ID';
-COMMENT ON COLUMN friends.user_id IS '用户ID';
-COMMENT ON COLUMN friends.friend_id IS '好友ID';
+COMMENT ON COLUMN friends.user_id IS '用户ID（逻辑外键）';
+COMMENT ON COLUMN friends.friend_id IS '好友ID（逻辑外键）';
 COMMENT ON COLUMN friends.create_time IS '创建时间';
 COMMENT ON COLUMN friends.update_time IS '更新时间';
 COMMENT ON COLUMN friends.deleted IS '逻辑删除';

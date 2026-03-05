@@ -10,9 +10,12 @@ import com.nebula.common.util.LogUtil;
 import com.nebula.config.config.JwtProperties;
 import com.nebula.model.dto.LoginDTO;
 import com.nebula.model.dto.RegisterDTO;
+import com.nebula.common.constant.AdminConstants;
 import com.nebula.model.entity.SysUser;
+import com.nebula.model.entity.system.SysUserRole;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
+import com.nebula.service.mapper.system.SysUserRoleMapper;
 import com.nebula.service.service.AuthService;
 import com.nebula.service.service.TokenStorageService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenStorageService tokenStorageService;
     private final JwtProperties jwtProperties;
+    private final SysUserRoleMapper sysUserRoleMapper;
 
     @Override
     @Transactional
@@ -96,6 +100,9 @@ public class AuthServiceImpl implements AuthService {
         sysUserMapper.insert(sysUser);
         LogUtil.Database.insert(log, "sys_user", sysUser.getId());
 
+        // 分配默认普通用户角色
+        assignDefaultRoleToUser(sysUser.getId());
+
         // 生成 Token
         TokenPair tokens = generateTokens(sysUser);
 
@@ -109,6 +116,17 @@ public class AuthServiceImpl implements AuthService {
 
         LogUtil.Auth.registerSuccess(log, sysUser.getId(), sysUser.getEmail(), sysUser.getUsername());
         return loginVO;
+    }
+
+    /**
+     * 给用户分配默认普通用户角色
+     */
+    private void assignDefaultRoleToUser(Long userId) {
+        SysUserRole userRole = new SysUserRole();
+        userRole.setUserId(userId);
+        userRole.setRoleId(AdminConstants.DEFAULT_USER_ROLE_ID);
+        sysUserRoleMapper.insert(userRole);
+        LogUtil.Database.insert(log, "sys_user_role", userId + " -> " + AdminConstants.DEFAULT_USER_ROLE_ID);
     }
 
     @Override

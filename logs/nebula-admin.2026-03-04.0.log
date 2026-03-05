@@ -1,0 +1,913 @@
+2026-03-04 13:28:58.568 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 87062 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-04 13:28:58.569 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-04 13:28:58.569 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-04 13:29:00.384 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 2.069 seconds (process running for 3.063)
+2026-03-04 13:32:13.574 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-04 13:32:13.578 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-03-04 13:32:13.652 [http-nio-8080-exec-2] INFO  com.nebula.api.controller.OAuthController - 收到GitHub OAuth回调
+2026-03-04 13:32:13.718 [http-nio-8080-exec-2] INFO  com.nebula.service.impl.OAuthServiceImpl - 开始处理GitHub OAuth回调, code长度: 20
+2026-03-04 13:32:15.661 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub access_token
+2026-03-04 13:32:16.896 [http-nio-8080-exec-2] INFO  com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub用户信息, GitHub ID: 88270200, Login: XiaoCheng991
+2026-03-04 13:32:17.061 [http-nio-8080-exec-2] INFO  com.nebula.service.impl.OAuthServiceImpl - 用户处理完成, 用户ID: 8, 用户名: github_88270200
+2026-03-04 13:32:17.308 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:8, ttl=1800s
+2026-03-04 13:32:17.309 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, ttl=1800s
+2026-03-04 13:32:17.310 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:8, ttl=604800s
+2026-03-04 13:32:17.311 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwMjMzNywiZXhwIjoxNzczMjA3MTM3fQ.dloaf-tLD6TTjXiIIe7V0s6p3yhuHEr768BdNannqnDd2k63_JLOQgkZi8Yi_l-u, ttl=604800s
+2026-03-04 13:32:17.311 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=8
+2026-03-04 13:32:17.314 [http-nio-8080-exec-2] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 13:32:17.319 [http-nio-8080-exec-2] INFO  com.nebula.service.impl.OAuthServiceImpl - GitHub OAuth登录成功, 用户ID: 8
+2026-03-04 13:32:17.322 [http-nio-8080-exec-2] INFO  com.nebula.api.controller.OAuthController - GitHub OAuth登录成功, 重定向到: http://localhost:3000/auth/github/callback?token=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN&refreshToken=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwMjMzNywiZXhwIjoxNzczMjA3MTM3fQ.dloaf-tLD6TTjXiIIe7V0s6p3yhuHEr768BdNannqnDd2k63_JLOQgkZi8Yi_l-u
+2026-03-04 13:32:17.739 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.739 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.741 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.741 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.744 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.744 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.745 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.746 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.752 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 13:32:17.755 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 13:32:17.781 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.781 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.782 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.783 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.784 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.784 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.786 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.786 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.789 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 13:32:17.790 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 13:32:17.803 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.805 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.807 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.809 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.812 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 13:32:17.820 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.821 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.822 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjAyMzM3LCJleHAiOjE3NzI2MDQxMzd9.Lb74Kyx6G84vhW40za2BAGJvgDyrDByt7emOlzlB5LzUrvtlfDUaQuNFToDzD1aN, hit=命中
+2026-03-04 13:32:17.822 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 13:32:17.825 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:17:24.308 [http-nio-8080-exec-4] WARN  com.nebula.service.impl.AuthServiceImpl - 用户登录失败 | email=17516476723@163.com, reason=密码错误
+2026-03-04 14:17:24.315 [http-nio-8080-exec-4] WARN  c.nebula.config.exception.GlobalExceptionHandler - 业务运行时异常: 密码错误
+2026-03-04 14:17:33.408 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:7, ttl=1800s
+2026-03-04 14:17:33.411 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, ttl=1800s
+2026-03-04 14:17:33.412 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:7, ttl=604800s
+2026-03-04 14:17:33.414 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6NywiZW1haWwiOiIxNzUxNjQ3NjcyM0AxNjMuY29tIiwiaWF0IjoxNzcyNjA1MDUzLCJleHAiOjE3NzMyMDk4NTN9.WssnnnjqsJEUtFzogiV7JicB-UXhviaXATNWFzTjZUQafuAePF2lG9HkHSj4bw-i, ttl=604800s
+2026-03-04 14:17:33.414 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=7
+2026-03-04 14:17:33.414 [http-nio-8080-exec-5] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 14:17:33.425 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.AuthServiceImpl - 数据库更新 | table=sys_user, id=7
+2026-03-04 14:17:33.425 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.AuthServiceImpl - 用户登录成功 | userId=7, email=17516476723@163.com
+2026-03-04 14:17:33.445 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:33.448 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:33.450 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:33.450 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:33.452 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 14:17:42.401 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:42.403 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:42.405 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:42.407 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:42.417 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 14:17:42.426 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:42.427 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:42.431 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:17:42.434 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:17:42.442 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 14:20:08.512 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:20:08.516 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:20:08.517 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc, hit=命中
+2026-03-04 14:20:08.519 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 14:20:08.521 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:refresh:user:7, hit=命中
+2026-03-04 14:20:08.547 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:access:user:7
+2026-03-04 14:20:08.549 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MDUwNTMsImV4cCI6MTc3MjYwNjg1M30.cjCKQAyReb1W4mmy9MFQmeYgukKzlIuSM_xd7SW8r2QzRLfbyE_MgH7y-oAIlPdc
+2026-03-04 14:20:08.550 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:refresh:user:7
+2026-03-04 14:20:08.551 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6NywiZW1haWwiOiIxNzUxNjQ3NjcyM0AxNjMuY29tIiwiaWF0IjoxNzcyNjA1MDUzLCJleHAiOjE3NzMyMDk4NTN9.WssnnnjqsJEUtFzogiV7JicB-UXhviaXATNWFzTjZUQafuAePF2lG9HkHSj4bw-i
+2026-03-04 14:20:08.551 [http-nio-8080-exec-4] INFO  com.nebula.service.impl.TokenStorageServiceImpl - 用户登出 | userId=7
+2026-03-04 14:20:08.551 [http-nio-8080-exec-4] INFO  com.nebula.service.impl.AuthServiceImpl - 用户登出 | userId=7
+2026-03-04 14:24:05.812 [http-nio-8080-exec-6] INFO  com.nebula.api.controller.OAuthController - 收到GitHub OAuth回调
+2026-03-04 14:24:05.824 [http-nio-8080-exec-6] INFO  com.nebula.service.impl.OAuthServiceImpl - 开始处理GitHub OAuth回调, code长度: 20
+2026-03-04 14:24:07.718 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub access_token
+2026-03-04 14:24:08.903 [http-nio-8080-exec-6] INFO  com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub用户信息, GitHub ID: 88270200, Login: XiaoCheng991
+2026-03-04 14:24:08.930 [http-nio-8080-exec-6] INFO  com.nebula.service.impl.OAuthServiceImpl - 用户处理完成, 用户ID: 8, 用户名: github_88270200
+2026-03-04 14:24:08.937 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:8, ttl=1800s
+2026-03-04 14:24:08.938 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, ttl=1800s
+2026-03-04 14:24:08.940 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:8, ttl=604800s
+2026-03-04 14:24:08.941 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwNTQ0OCwiZXhwIjoxNzczMjEwMjQ4fQ.r1Xg3_Rt3OtuG_GSQboxdf7hf8GJlRxHQh_Nu2oVxExf5B_ubpjznL_zvGcPDRQd, ttl=604800s
+2026-03-04 14:24:08.941 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=8
+2026-03-04 14:24:08.942 [http-nio-8080-exec-6] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 14:24:08.946 [http-nio-8080-exec-6] INFO  com.nebula.service.impl.OAuthServiceImpl - GitHub OAuth登录成功, 用户ID: 8
+2026-03-04 14:24:08.950 [http-nio-8080-exec-6] INFO  com.nebula.api.controller.OAuthController - GitHub OAuth登录成功, 重定向到: http://localhost:3000/auth/github/callback?token=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk&refreshToken=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwNTQ0OCwiZXhwIjoxNzczMjEwMjQ4fQ.r1Xg3_Rt3OtuG_GSQboxdf7hf8GJlRxHQh_Nu2oVxExf5B_ubpjznL_zvGcPDRQd
+2026-03-04 14:24:09.561 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.563 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.565 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.565 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.567 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.567 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.570 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.572 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.575 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:24:09.588 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.588 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:24:09.590 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.592 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.594 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.596 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.596 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:24:09.597 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.598 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.599 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.601 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:24:09.612 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.613 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.615 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.618 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.620 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:24:09.625 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.626 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.628 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:24:09.628 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:24:09.629 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:46:23.368 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 906 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-04 14:46:23.369 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-04 14:46:23.369 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-04 14:46:25.226 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 2.111 seconds (process running for 3.089)
+2026-03-04 14:46:56.988 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-04 14:46:56.990 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-03-04 14:46:57.235 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:46:57.240 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:46:57.247 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:46:57.249 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:46:57.361 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 14:46:57.384 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:46:57.386 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:46:57.386 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA1NDQ4LCJleHAiOjE3NzI2MDcyNDh9.CENSoBS3DPe6PB9i6MYwAyclLe7PltEFfZYZBu4-DgYvJ6nEqGLYuLsxWCrUadWk, hit=命中
+2026-03-04 14:46:57.387 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 14:46:57.391 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:47.113 [http-nio-8080-exec-5] INFO  com.nebula.api.controller.OAuthController - 收到GitHub OAuth回调
+2026-03-04 15:00:47.131 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 开始处理GitHub OAuth回调, code长度: 20
+2026-03-04 15:00:54.345 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub access_token
+2026-03-04 15:00:57.172 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub用户信息, GitHub ID: 88270200, Login: XiaoCheng991
+2026-03-04 15:00:57.263 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 用户处理完成, 用户ID: 8, 用户名: github_88270200
+2026-03-04 15:00:57.302 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:8, ttl=1800s
+2026-03-04 15:00:57.306 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, ttl=1800s
+2026-03-04 15:00:57.310 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:8, ttl=604800s
+2026-03-04 15:00:57.313 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwNzY1NywiZXhwIjoxNzczMjEyNDU3fQ.AM41RiYvwgikMz2F913apbD5Cu9vP0HHd4x5q2_RZY08ATy7Xm17h3akN6A99Yh5, ttl=604800s
+2026-03-04 15:00:57.313 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=8
+2026-03-04 15:00:57.318 [http-nio-8080-exec-5] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 15:00:57.326 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - GitHub OAuth登录成功, 用户ID: 8
+2026-03-04 15:00:57.330 [http-nio-8080-exec-5] INFO  com.nebula.api.controller.OAuthController - GitHub OAuth登录成功, 重定向到: http://localhost:3000/auth/github/callback?token=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S&refreshToken=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwNzY1NywiZXhwIjoxNzczMjEyNDU3fQ.AM41RiYvwgikMz2F913apbD5Cu9vP0HHd4x5q2_RZY08ATy7Xm17h3akN6A99Yh5
+2026-03-04 15:00:57.947 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.949 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.951 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.951 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.953 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.953 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.955 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.957 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.960 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:57.970 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.972 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.972 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:57.976 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.981 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.986 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:57.986 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.988 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.991 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:57.992 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:57.995 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:58.000 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:58.001 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:58.003 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:58.004 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:58.006 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:00:58.011 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:58.012 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:58.012 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:00:58.013 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:00:58.015 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:26.606 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:26.610 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:26.612 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:26.613 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:26.624 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:26.634 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:26.635 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:26.636 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:26.637 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:26.642 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:28.181 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:28.182 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:28.184 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:28.185 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:28.189 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:28.196 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:28.199 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:28.200 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:28.201 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:28.203 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:30.710 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:30.712 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:30.714 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:30.715 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:30.719 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:01:30.726 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:30.728 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:30.730 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:01:30.732 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:01:30.734 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:46.447 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:46.454 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:46.456 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:46.459 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:46.474 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:46.486 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:46.487 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:46.488 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:46.489 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:46.493 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:51.558 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:51.561 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:51.562 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:51.564 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:51.569 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:51.577 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:51.578 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:51.580 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:51.582 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:51.584 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:53.960 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:53.962 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:53.963 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:53.965 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:53.968 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:06:53.976 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:53.978 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:53.979 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:06:53.980 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:06:53.983 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:07:00.219 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.220 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.221 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.222 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.227 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:07:00.233 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.235 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.236 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.237 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.239 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:07:00.944 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.946 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.953 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.959 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.964 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:07:00.974 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.976 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.977 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:07:00.978 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:07:00.980 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:15:04.745 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:15:04.748 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:15:04.749 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:15:04.751 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:15:04.765 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:15:04.779 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:15:04.782 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:15:04.784 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:15:04.785 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:15:04.788 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:16:57.298 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:16:57.303 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:16:57.307 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:16:57.314 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:16:57.337 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:16:57.346 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:16:57.347 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:16:57.348 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:16:57.348 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:16:57.350 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 15:24:50.065 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:24:50.068 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:24:50.069 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S, hit=命中
+2026-03-04 15:24:50.073 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 15:24:50.075 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:refresh:user:8, hit=命中
+2026-03-04 15:24:50.080 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:access:user:8
+2026-03-04 15:24:50.082 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjA3NjU3LCJleHAiOjE3NzI2MDk0NTd9.YII5DrReCGQOHMQyCcUVeVr8TvxqhNyFfOB57IqCToq50_4xSG1fiQBD81NNTk2S
+2026-03-04 15:24:50.084 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:refresh:user:8
+2026-03-04 15:24:50.089 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis删除 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYwNzY1NywiZXhwIjoxNzczMjEyNDU3fQ.AM41RiYvwgikMz2F913apbD5Cu9vP0HHd4x5q2_RZY08ATy7Xm17h3akN6A99Yh5
+2026-03-04 15:24:50.089 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.TokenStorageServiceImpl - 用户登出 | userId=8
+2026-03-04 15:24:50.089 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.AuthServiceImpl - 用户登出 | userId=8
+2026-03-04 16:25:05.927 [http-nio-8080-exec-6] WARN  com.nebula.service.impl.AuthServiceImpl - 用户登录失败 | email=17516476723@163.com, reason=密码错误
+2026-03-04 16:25:05.934 [http-nio-8080-exec-6] WARN  c.nebula.config.exception.GlobalExceptionHandler - 业务运行时异常: 密码错误
+2026-03-04 16:25:08.705 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:7, ttl=1800s
+2026-03-04 16:25:08.706 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, ttl=1800s
+2026-03-04 16:25:08.707 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:7, ttl=604800s
+2026-03-04 16:25:08.728 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6NywiZW1haWwiOiIxNzUxNjQ3NjcyM0AxNjMuY29tIiwiaWF0IjoxNzcyNjEyNzA4LCJleHAiOjE3NzMyMTc1MDh9.r5oXhDidK_hH65vhs2Oa7L9IuAypqY2KCgpCLCdQ1YSTkdici9W9mbZRrv7JsB0_, ttl=604800s
+2026-03-04 16:25:08.728 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=7
+2026-03-04 16:25:08.729 [http-nio-8080-exec-7] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 16:25:08.739 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.AuthServiceImpl - 数据库更新 | table=sys_user, id=7
+2026-03-04 16:25:08.739 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.AuthServiceImpl - 用户登录成功 | userId=7, email=17516476723@163.com
+2026-03-04 16:25:08.822 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:08.825 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:08.827 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:08.831 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:08.833 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 16:25:31.504 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:31.506 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:31.508 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:31.510 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:31.519 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 16:25:31.529 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:31.529 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:31.530 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=命中
+2026-03-04 16:25:31.531 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:7, hit=命中
+2026-03-04 16:25:31.533 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=7
+2026-03-04 19:18:49.915 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 50636 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-04 19:18:49.917 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-04 19:18:49.917 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-04 19:18:52.720 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 3.286 seconds (process running for 4.219)
+2026-03-04 19:19:01.067 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-04 19:19:01.070 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-03-04 19:19:01.321 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=未命中
+2026-03-04 19:19:01.324 [http-nio-8080-exec-3] WARN  com.nebula.service.impl.AuthServiceImpl - Token验证失败 | token=eyJhbG...aHBk, reason=Token已过期或无效
+2026-03-04 19:19:01.325 [http-nio-8080-exec-3] ERROR com.nebula.api.controller.ProfileController - 获取用户档案失败
+com.nebula.common.exception.BusinessException: 登录已过期，请重新登录
+	at com.nebula.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:161)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
+	at com.nebula.service.impl.AuthServiceImpl$$SpringCGLIB$$0.validateToken(<generated>)
+	at com.nebula.api.controller.ProfileController.getUserProfile(ProfileController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-04 19:19:01.372 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo3LCJlbWFpbCI6IjE3NTE2NDc2NzIzQDE2My5jb20iLCJpYXQiOjE3NzI2MTI3MDgsImV4cCI6MTc3MjYxNDUwOH0.-Blrd8UR-zqmrnYoVM-0b3feONqMWVfc6aL9P3RxNXkT1EAw7ppPK8JWMIqzaHBk, hit=未命中
+2026-03-04 19:19:01.372 [http-nio-8080-exec-4] WARN  com.nebula.service.impl.AuthServiceImpl - Token验证失败 | token=eyJhbG...aHBk, reason=Token已过期或无效
+2026-03-04 19:19:01.373 [http-nio-8080-exec-4] ERROR com.nebula.api.controller.ProfileController - 获取用户档案失败
+com.nebula.common.exception.BusinessException: 登录已过期，请重新登录
+	at com.nebula.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:161)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
+	at com.nebula.service.impl.AuthServiceImpl$$SpringCGLIB$$0.validateToken(<generated>)
+	at com.nebula.api.controller.ProfileController.getUserProfile(ProfileController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-04 19:19:07.017 [http-nio-8080-exec-7] INFO  com.nebula.api.controller.OAuthController - 收到GitHub OAuth回调
+2026-03-04 19:19:07.130 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.OAuthServiceImpl - 开始处理GitHub OAuth回调, code长度: 20
+2026-03-04 19:19:11.784 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub access_token
+2026-03-04 19:19:13.332 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub用户信息, GitHub ID: 88270200, Login: XiaoCheng991
+2026-03-04 19:19:13.433 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.OAuthServiceImpl - 用户处理完成, 用户ID: 8, 用户名: github_88270200
+2026-03-04 19:19:13.479 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:8, ttl=86400s
+2026-03-04 19:19:13.489 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, ttl=86400s
+2026-03-04 19:19:13.492 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:8, ttl=604800s
+2026-03-04 19:19:13.493 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYyMzE1MywiZXhwIjoxNzczMjI3OTUzfQ.dzogD-D4s_UyaA8LLaQzX5QFnxduSOmte0W6iAl8Qv_5hj4C33CnWLmpOUJuEurb, ttl=604800s
+2026-03-04 19:19:13.493 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=8
+2026-03-04 19:19:13.497 [http-nio-8080-exec-7] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 19:19:13.505 [http-nio-8080-exec-7] INFO  com.nebula.service.impl.OAuthServiceImpl - GitHub OAuth登录成功, 用户ID: 8
+2026-03-04 19:19:13.510 [http-nio-8080-exec-7] INFO  com.nebula.api.controller.OAuthController - GitHub OAuth登录成功, 重定向到: http://localhost:3000/auth/github/callback?token=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr&refreshToken=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYyMzE1MywiZXhwIjoxNzczMjI3OTUzfQ.dzogD-D4s_UyaA8LLaQzX5QFnxduSOmte0W6iAl8Qv_5hj4C33CnWLmpOUJuEurb
+2026-03-04 19:19:14.097 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.097 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.100 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.100 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.101 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.101 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.103 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.103 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.110 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:19:14.113 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:19:14.115 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.116 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.117 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.118 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.120 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.122 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:19:14.123 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.127 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.129 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.133 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:19:14.142 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.144 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.146 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.147 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.150 [http-nio-8080-exec-4] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:19:14.157 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.159 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.161 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:19:14.162 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:19:14.166 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:30:40.728 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 52781 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-04 19:30:40.728 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-04 19:30:40.729 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-04 19:30:42.660 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 2.21 seconds (process running for 2.732)
+2026-03-04 19:34:09.005 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-04 19:34:09.011 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2026-03-04 19:34:09.278 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:34:09.281 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:34:09.283 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:34:09.286 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:34:09.400 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:34:09.424 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:34:09.425 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:34:09.426 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:34:09.427 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:34:09.429 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:35:47.562 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:35:47.570 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:35:47.571 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:35:47.572 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:35:47.582 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:35:47.591 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:35:47.593 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:35:47.595 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=命中
+2026-03-04 19:35:47.596 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:35:47.597 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:03.289 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 54103 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-04 19:38:03.289 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-04 19:38:03.290 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-04 19:38:05.161 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 2.094 seconds (process running for 2.564)
+2026-03-04 19:38:21.799 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-04 19:38:21.803 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-03-04 19:38:22.072 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=未命中
+2026-03-04 19:38:22.074 [http-nio-8080-exec-1] WARN  com.nebula.service.impl.AuthServiceImpl - Token验证失败 | token=eyJhbG...Qpsr, reason=Token已过期或无效
+2026-03-04 19:38:22.075 [http-nio-8080-exec-1] ERROR com.nebula.api.controller.ProfileController - 获取用户档案失败
+com.nebula.common.exception.BusinessException: 登录已过期，请重新登录
+	at com.nebula.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:161)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
+	at com.nebula.service.impl.AuthServiceImpl$$SpringCGLIB$$0.validateToken(<generated>)
+	at com.nebula.api.controller.ProfileController.getUserProfile(ProfileController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-04 19:38:22.119 [http-nio-8080-exec-2] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjIzMTUzLCJleHAiOjE3NzI3MDk1NTN9.BlG56eq4A_8ayRYuaIx9RMAJyN4LcH7tNvqyklSwu3LX0DxxMPukXYpd9B6JQpsr, hit=未命中
+2026-03-04 19:38:22.119 [http-nio-8080-exec-2] WARN  com.nebula.service.impl.AuthServiceImpl - Token验证失败 | token=eyJhbG...Qpsr, reason=Token已过期或无效
+2026-03-04 19:38:22.120 [http-nio-8080-exec-2] ERROR com.nebula.api.controller.ProfileController - 获取用户档案失败
+com.nebula.common.exception.BusinessException: 登录已过期，请重新登录
+	at com.nebula.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:161)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
+	at com.nebula.service.impl.AuthServiceImpl$$SpringCGLIB$$0.validateToken(<generated>)
+	at com.nebula.api.controller.ProfileController.getUserProfile(ProfileController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-04 19:38:25.486 [http-nio-8080-exec-5] INFO  com.nebula.api.controller.OAuthController - 收到GitHub OAuth回调
+2026-03-04 19:38:25.605 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 开始处理GitHub OAuth回调, code长度: 20
+2026-03-04 19:38:27.540 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub access_token
+2026-03-04 19:38:28.742 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 成功获取GitHub用户信息, GitHub ID: 88270200, Login: XiaoCheng991
+2026-03-04 19:38:28.821 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - 用户处理完成, 用户ID: 8, 用户名: github_88270200
+2026-03-04 19:38:28.881 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=未命中
+2026-03-04 19:38:28.883 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:refresh:user:8, hit=未命中
+2026-03-04 19:38:28.889 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:user:8, ttl=86400s
+2026-03-04 19:38:28.890 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, ttl=86400s
+2026-03-04 19:38:28.891 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:user:8, ttl=604800s
+2026-03-04 19:38:28.893 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis设置 | key=nebula:token:refresh:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYyNDMwOCwiZXhwIjoxNzczMjI5MTA4fQ.SHL3yWuKR6D43ilcojnah_PaD3ysz8_LLIZhT3RR4P4AgwemA6PW49407lquSFQu, ttl=604800s
+2026-03-04 19:38:28.893 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Token保存成功 | userId=8
+2026-03-04 19:38:28.897 [http-nio-8080-exec-5] DEBUG c.n.c.interceptor.MybatisPlusMetaObjectHandler - 开始更新填充...
+2026-03-04 19:38:28.906 [http-nio-8080-exec-5] INFO  com.nebula.service.impl.OAuthServiceImpl - GitHub OAuth登录成功, 用户ID: 8
+2026-03-04 19:38:28.909 [http-nio-8080-exec-5] INFO  com.nebula.api.controller.OAuthController - GitHub OAuth登录成功, 重定向到: http://localhost:3000/auth/github/callback?token=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq&refreshToken=eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6OCwiZW1haWwiOiJnaXRodWJfODgyNzAyMDBAZ2l0aHViLmNvbSIsImlhdCI6MTc3MjYyNDMwOCwiZXhwIjoxNzczMjI5MTA4fQ.SHL3yWuKR6D43ilcojnah_PaD3ysz8_LLIZhT3RR4P4AgwemA6PW49407lquSFQu
+2026-03-04 19:38:29.439 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.439 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.443 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.444 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.445 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.445 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.447 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.447 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.457 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:29.460 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:29.467 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.467 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.469 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.469 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.471 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.471 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.473 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.473 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.476 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:29.476 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:29.486 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.489 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.502 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.507 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.509 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:38:29.514 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.515 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.516 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:38:29.517 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:38:29.522 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:55:11.482 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:55:11.487 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:55:11.488 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:55:11.497 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:55:11.510 [http-nio-8080-exec-7] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:55:11.534 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:55:11.537 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:55:11.539 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:55:11.540 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:55:11.543 [http-nio-8080-exec-9] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:56:09.911 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:56:09.916 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:56:09.919 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:56:09.921 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:56:09.935 [http-nio-8080-exec-1] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:56:09.948 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:56:09.950 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:56:09.951 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:56:09.951 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:56:09.954 [http-nio-8080-exec-3] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:57:13.635 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:57:13.642 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:57:13.649 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:57:13.651 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:57:13.666 [http-nio-8080-exec-5] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:57:13.677 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:57:13.678 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:57:13.681 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:57:13.682 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:57:13.684 [http-nio-8080-exec-6] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:59:47.947 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:59:47.950 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:59:47.951 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:59:47.953 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:59:47.962 [http-nio-8080-exec-8] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8
+2026-03-04 19:59:47.969 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:59:47.970 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:59:47.972 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:value:eyJhbGciOiJIUzM4NCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjo4LCJlbWFpbCI6ImdpdGh1Yl84ODI3MDIwMEBnaXRodWIuY29tIiwiaWF0IjoxNzcyNjI0MzA4LCJleHAiOjE3NzI3MTA3MDh9.bEShd9uKYaVdqzviMomHSAwEUhq-Y5YsJXVHzV95Gat8dODh1a2Lt40c1tQLxyjq, hit=命中
+2026-03-04 19:59:47.974 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.TokenStorageServiceImpl - Redis获取 | key=nebula:token:access:user:8, hit=命中
+2026-03-04 19:59:47.976 [http-nio-8080-exec-10] DEBUG com.nebula.service.impl.AuthServiceImpl - 获取用户信息 | userId=8

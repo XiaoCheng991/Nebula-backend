@@ -8,7 +8,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -180,5 +189,87 @@ public class MinioUtil {
                 .build());
 
         log.info("文件复制成功: {}/{} -> {}/{}", sourceBucket, sourceFile, targetBucket, targetFile);
+    }
+
+    /**
+     * 从URL下载图片并上传到MinIO
+     *
+     * @param bucketName 存储桶名称
+     * @param imageUrl   图片URL
+     * @param fileName   目标文件名（可选，为空则自动生成）
+     * @return 包含fileName、fileSize、fileUrl的Map
+     */
+    @SneakyThrows
+    public Map<String, Object> uploadImageFromUrl(String bucketName, String imageUrl, String fileName) {
+        log.info("开始从URL下载图片: {}", imageUrl);
+
+        // 从URL下载图片
+        URL url = new URI(imageUrl).toURL();
+        try (InputStream inputStream = url.openStream()) {
+            // 读取到字节数组，以便获取大小
+            byte[] imageBytes = inputStream.readAllBytes();
+            long fileSize = imageBytes.length;
+
+            // 生成文件名
+            String finalFileName = fileName;
+            if (finalFileName == null || finalFileName.isEmpty()) {
+                String extension = getExtensionFromUrl(imageUrl);
+                finalFileName = "avatars/" + UUID.randomUUID() + extension;
+            }
+
+            // 上传到MinIO
+            try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(imageBytes)) {
+                minioClient.putObject(PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(finalFileName)
+                        .stream(byteArrayInputStream, fileSize, -1)
+                        .contentType(getContentTypeFromUrl(imageUrl))
+                        .build());
+            }
+
+            log.info("图片上传成功: {}/{}, 大小: {} bytes", bucketName, finalFileName, fileSize);
+
+            // 构建返回结果
+            Map<String, Object> result = new HashMap<>();
+            result.put("fileName", finalFileName);
+            result.put("fileSize", fileSize);
+            result.put("fileUrl", finalFileName); // 这里返回的是MinIO中的object name
+
+            return result;
+        }
+    }
+
+    /**
+     * 从URL获取文件扩展名
+     */
+    private String getExtensionFromUrl(String url) {
+        String lowerUrl = url.toLowerCase();
+        if (lowerUrl.contains(".png")) {
+            return ".png";
+        } else if (lowerUrl.contains(".jpg") || lowerUrl.contains(".jpeg")) {
+            return ".jpg";
+        } else if (lowerUrl.contains(".gif")) {
+            return ".gif";
+        } else if (lowerUrl.contains(".webp")) {
+            return ".webp";
+        }
+        return ".jpg"; // 默认
+    }
+
+    /**
+     * 从URL获取Content-Type
+     */
+    private String getContentTypeFromUrl(String url) {
+        String lowerUrl = url.toLowerCase();
+        if (lowerUrl.contains(".png")) {
+            return "image/png";
+        } else if (lowerUrl.contains(".jpg") || lowerUrl.contains(".jpeg")) {
+            return "image/jpeg";
+        } else if (lowerUrl.contains(".gif")) {
+            return "image/gif";
+        } else if (lowerUrl.contains(".webp")) {
+            return "image/webp";
+        }
+        return "image/jpeg"; // 默认
     }
 }

@@ -25,22 +25,40 @@ public class TokenStorageServiceImpl implements TokenStorageService {
     @Override
     public void saveTokens(Long userId, String accessToken, String refreshToken, long accessTtl, long refreshTtl) {
         try {
-            // 保存 Access Token（按用户索引）
+            // 先获取并清理旧的token
+            String oldAccessToken = getAccessToken(userId);
+            String oldRefreshToken = getRefreshToken(userId);
+
+            // 清理旧的 Access Token（按 Token 索引）
+            if (oldAccessToken != null) {
+                String oldUserByAccessTokenKey = RedisKey.Token.userByAccessToken(oldAccessToken);
+                redisTemplate.delete(oldUserByAccessTokenKey);
+                LogUtil.Redis.delete(log, oldUserByAccessTokenKey);
+            }
+
+            // 清理旧的 Refresh Token（按 Token 索引）
+            if (oldRefreshToken != null) {
+                String oldUserByRefreshTokenKey = RedisKey.Token.userByRefreshToken(oldRefreshToken);
+                redisTemplate.delete(oldUserByRefreshTokenKey);
+                LogUtil.Redis.delete(log, oldUserByRefreshTokenKey);
+            }
+
+            // 保存新的 Access Token（按用户索引）
             String accessTokenByUserKey = RedisKey.Token.accessTokenByUser(userId);
             redisTemplate.opsForValue().set(accessTokenByUserKey, accessToken, accessTtl, TimeUnit.SECONDS);
             LogUtil.Redis.set(log, accessTokenByUserKey, accessTtl);
 
-            // 保存 Access Token（按 Token 索引）
+            // 保存新的 Access Token（按 Token 索引）
             String userByAccessTokenKey = RedisKey.Token.userByAccessToken(accessToken);
             redisTemplate.opsForValue().set(userByAccessTokenKey, userId, accessTtl, TimeUnit.SECONDS);
             LogUtil.Redis.set(log, userByAccessTokenKey, accessTtl);
 
-            // 保存 Refresh Token（按用户索引）
+            // 保存新的 Refresh Token（按用户索引）
             String refreshTokenByUserKey = RedisKey.Token.refreshTokenByUser(userId);
             redisTemplate.opsForValue().set(refreshTokenByUserKey, refreshToken, refreshTtl, TimeUnit.SECONDS);
             LogUtil.Redis.set(log, refreshTokenByUserKey, refreshTtl);
 
-            // 保存 Refresh Token（按 Token 索引）
+            // 保存新的 Refresh Token（按 Token 索引）
             String userByRefreshTokenKey = RedisKey.Token.userByRefreshToken(refreshToken);
             redisTemplate.opsForValue().set(userByRefreshTokenKey, userId, refreshTtl, TimeUnit.SECONDS);
             LogUtil.Redis.set(log, userByRefreshTokenKey, refreshTtl);

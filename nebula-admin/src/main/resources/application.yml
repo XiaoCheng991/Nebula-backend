@@ -75,7 +75,7 @@ knife4j:
 
 # MinIO配置
 minio:
-  endpoint: http://localshot:9000
+  endpoint: http://localhost:9000
   access-key: minioadmin
   secret-key: minioadmin
   bucket-name: user-uploads
@@ -84,8 +84,8 @@ minio:
 jwt:
   # JWT密钥（生产环境应该使用更复杂的密钥）
   secret: nebula-secret-key-2024-spring-boot-jwt-token-refresh-enabled
-  # Access Token过期时间（单位：毫秒，默认30分钟）
-  access-token-expiration: 1800000
+  # Access Token过期时间（单位：毫秒，默认24小时）
+  access-token-expiration: 86400000
   # Refresh Token过期时间（单位：毫秒，默认7天）
   refresh-token-expiration: 604800000
 
