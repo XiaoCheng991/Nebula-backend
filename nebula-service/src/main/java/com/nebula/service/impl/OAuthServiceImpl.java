@@ -60,7 +60,6 @@ public class OAuthServiceImpl implements OAuthService {
     private final SysUserRoleMapper sysUserRoleMapper;
     private final MinioUtil minioUtil;
     private final MinioConfig minioConfig;
-    private final RestTemplate githubRestTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -441,11 +440,6 @@ public class OAuthServiceImpl implements OAuthService {
      */
     private String exchangeCodeForToken(String code) {
         try {
-            log.info("开始换取GitHub access_token, code长度: {}", code != null ? code.length() : 0);
-            log.info("GitHub OAuth配置 - clientId: {}, redirectUri: {}",
-                    gitHubOAuthProperties.getClientId(),
-                    gitHubOAuthProperties.getRedirectUri());
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.set("Accept", "application/json");
@@ -458,9 +452,6 @@ public class OAuthServiceImpl implements OAuthService {
 
             HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
-            log.info("请求GitHub token API: {}", gitHubOAuthProperties.getTokenUrl());
-
-            // 先以字符串形式获取响应，便于调试
             ResponseEntity<String> stringResponse = restTemplate.exchange(
                     gitHubOAuthProperties.getTokenUrl(),
                     HttpMethod.POST,
@@ -468,10 +459,6 @@ public class OAuthServiceImpl implements OAuthService {
                     String.class
             );
 
-            log.info("GitHub token API响应状态: {}", stringResponse.getStatusCode());
-            log.info("GitHub token API原始响应: {}", stringResponse.getBody());
-
-            // 手动解析响应
             String responseBody = stringResponse.getBody();
             if (responseBody == null || responseBody.isEmpty()) {
                 log.error("GitHub返回的响应为空");
@@ -482,7 +469,6 @@ public class OAuthServiceImpl implements OAuthService {
 
             // 尝试解析JSON格式
             if (responseBody.trim().startsWith("{")) {
-                log.info("检测到JSON格式响应");
                 try {
                     com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
                     java.util.Map<String, Object> jsonMap = mapper.readValue(responseBody, java.util.Map.class);
@@ -494,7 +480,6 @@ public class OAuthServiceImpl implements OAuthService {
 
             // 如果JSON没解析到，尝试表单格式
             if (accessToken == null) {
-                log.info("尝试解析表单格式响应");
                 String[] pairs = responseBody.split("&");
                 for (String pair : pairs) {
                     String[] keyValue = pair.split("=", 2);
@@ -510,7 +495,6 @@ public class OAuthServiceImpl implements OAuthService {
                 throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "获取GitHub访问令牌失败，响应中未找到access_token");
             }
 
-            log.info("成功解析GitHub access_token, 长度: {}", accessToken.length());
             return accessToken;
         } catch (BusinessException e) {
             throw e;
@@ -525,8 +509,6 @@ public class OAuthServiceImpl implements OAuthService {
      */
     private GitHubUserInfo fetchGitHubUserInfo(String accessToken) {
         try {
-            log.info("开始获取GitHub用户信息, accessToken长度: {}", accessToken != null ? accessToken.length() : 0);
-
             HttpHeaders headers = new HttpHeaders();
             if (accessToken != null) {
                 headers.setBearerAuth(accessToken);
@@ -534,8 +516,6 @@ public class OAuthServiceImpl implements OAuthService {
             headers.set("Accept", "application/vnd.github.v3+json");
 
             HttpEntity<Void> request = new HttpEntity<>(headers);
-
-            log.info("请求GitHub用户信息API: {}", gitHubOAuthProperties.getUserInfoUrl());
 
             ResponseEntity<String> stringResponse = restTemplate.exchange(
                     gitHubOAuthProperties.getUserInfoUrl(),
@@ -545,8 +525,6 @@ public class OAuthServiceImpl implements OAuthService {
             );
 
             String responseBody = stringResponse.getBody();
-            log.info("GitHub返回原始响应: {}", responseBody);
-
             if (responseBody == null || responseBody.isEmpty()) {
                 log.error("GitHub返回的用户信息为空");
                 throw new BusinessException(ErrorCode.OAUTH_USER_INFO_ERROR, "获取GitHub用户信息失败");
@@ -563,9 +541,6 @@ public class OAuthServiceImpl implements OAuthService {
             userInfo.setEmail((String) jsonMap.get("email"));
             userInfo.setAvatarUrl((String) jsonMap.get("avatar_url"));
             userInfo.setBio((String) jsonMap.get("bio"));
-
-            log.info("成功解析GitHub用户信息: ID={}, Login={}, AvatarUrl={}",
-                    userInfo.getId(), userInfo.getLogin(), userInfo.getAvatarUrl());
 
             return userInfo;
         } catch (BusinessException e) {
