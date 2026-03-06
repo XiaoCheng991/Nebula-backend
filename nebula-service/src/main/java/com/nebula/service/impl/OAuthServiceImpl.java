@@ -15,7 +15,6 @@ import com.nebula.model.dto.GitHubOAuthDTO;
 import com.nebula.model.entity.SysUser;
 import com.nebula.model.entity.system.SysUserRole;
 import com.nebula.model.vo.GitHubOAuthConfirmVO;
-import com.nebula.model.vo.GitHubTokenResponse;
 import com.nebula.model.vo.GitHubUserInfo;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
@@ -61,6 +60,7 @@ public class OAuthServiceImpl implements OAuthService {
     private final SysUserRoleMapper sysUserRoleMapper;
     private final MinioUtil minioUtil;
     private final MinioConfig minioConfig;
+    private final RestTemplate githubRestTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -233,6 +233,92 @@ public class OAuthServiceImpl implements OAuthService {
         }
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public LoginVO loginGitHubExistingUser(String tempToken) {
+        log.info("老用户直接GitHub登录, tempToken: {}", tempToken);
+
+        try {
+            // 1. 从Redis获取暂存的GitHub用户信息
+            String tempKey = GITHUB_OAUTH_TEMP_PREFIX + tempToken;
+            @SuppressWarnings("unchecked")
+            Map<String, Object> tempData = (Map<String, Object>) redisTemplate.opsForValue().get(tempKey);
+
+            if (tempData == null) {
+                log.error("GitHub OAuth临时token已过期或不存在: {}", tempToken);
+                throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "临时登录凭证已过期，请重新授权");
+            }
+
+            // 2. 删除临时token，防止重复使用
+            redisTemplate.delete(tempKey);
+
+            // 3. 提取GitHub用户信息
+            Long githubId = ((Number) tempData.get("githubId")).longValue();
+            String githubLogin = (String) tempData.get("githubLogin");
+            String avatarUrl = (String) tempData.get("avatarUrl");
+            boolean isNewUser = (Boolean) tempData.get("isNewUser");
+
+            if (isNewUser) {
+                log.error("新用户不能使用老用户直接登录接口, githubId: {}", githubId);
+                throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "新用户需要先确认信息");
+            }
+
+            // 4. 查找现有用户
+            LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(SysUser::getUsername, "github_" + githubId);
+            SysUser sysUser = sysUserMapper.selectOne(wrapper);
+
+            if (sysUser == null) {
+                log.error("未找到GitHub用户, githubId: {}", githubId);
+                throw new BusinessException(ErrorCode.USER_NOT_FOUND);
+            }
+
+            // 5. 更新用户信息（包括头像）
+            boolean needUpdate = false;
+            if (avatarUrl != null) {
+                try {
+                    Map<String, Object> uploadResult = uploadAvatarToMinio(avatarUrl, githubId);
+                    sysUser.setAvatarName((String) uploadResult.get("fileName"));
+                    sysUser.setAvatarSize((Long) uploadResult.get("fileSize"));
+                    sysUser.setAvatarUrl((String) uploadResult.get("fileUrl"));
+                    needUpdate = true;
+                    log.info("更新GitHub用户头像成功, 用户ID: {}", sysUser.getId());
+                } catch (Exception e) {
+                    log.warn("上传GitHub头像到MinIO失败，使用GitHub原始URL: {}", e.getMessage());
+                    sysUser.setAvatarUrl(avatarUrl);
+                    needUpdate = true;
+                }
+            }
+            if (needUpdate) {
+                sysUserMapper.updateById(sysUser);
+            }
+
+            // 6. 生成 Token 对
+            TokenPair tokens = generateTokens(sysUser);
+
+            // 7. 保存 Token 到 Redis
+            long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
+            long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
+            tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
+
+            // 8. 更新用户最后登录时间
+            updateUserLoginInfo(sysUser);
+
+            // 9. 构建返回结果
+            LoginVO loginVO = buildLoginVO(sysUser, tokens.accessToken(), tokens.refreshToken());
+            log.info("GitHub老用户直接登录成功, 用户ID: {}", sysUser.getId());
+
+            return loginVO;
+
+        } catch (BusinessException e) {
+            log.error("GitHub老用户登录业务异常: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("GitHub老用户登录失败", e);
+            throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "GitHub登录失败，请稍后重试");
+        }
+    }
+
     /**
      * 检查用户是否已存在
      */
@@ -355,6 +441,11 @@ public class OAuthServiceImpl implements OAuthService {
      */
     private String exchangeCodeForToken(String code) {
         try {
+            log.info("开始换取GitHub access_token, code长度: {}", code != null ? code.length() : 0);
+            log.info("GitHub OAuth配置 - clientId: {}, redirectUri: {}",
+                    gitHubOAuthProperties.getClientId(),
+                    gitHubOAuthProperties.getRedirectUri());
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.set("Accept", "application/json");
@@ -367,25 +458,65 @@ public class OAuthServiceImpl implements OAuthService {
 
             HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
-            ResponseEntity<GitHubTokenResponse> response = restTemplate.exchange(
+            log.info("请求GitHub token API: {}", gitHubOAuthProperties.getTokenUrl());
+
+            // 先以字符串形式获取响应，便于调试
+            ResponseEntity<String> stringResponse = restTemplate.exchange(
                     gitHubOAuthProperties.getTokenUrl(),
                     HttpMethod.POST,
                     request,
-                    GitHubTokenResponse.class
+                    String.class
             );
 
-            GitHubTokenResponse tokenResponse = response.getBody();
-            if (tokenResponse == null || tokenResponse.getAccess_token() == null) {
-                log.error("GitHub返回的access_token为空");
+            log.info("GitHub token API响应状态: {}", stringResponse.getStatusCode());
+            log.info("GitHub token API原始响应: {}", stringResponse.getBody());
+
+            // 手动解析响应
+            String responseBody = stringResponse.getBody();
+            if (responseBody == null || responseBody.isEmpty()) {
+                log.error("GitHub返回的响应为空");
                 throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "获取GitHub访问令牌失败");
             }
 
-            return tokenResponse.getAccess_token();
+            String accessToken = null;
+
+            // 尝试解析JSON格式
+            if (responseBody.trim().startsWith("{")) {
+                log.info("检测到JSON格式响应");
+                try {
+                    com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+                    java.util.Map<String, Object> jsonMap = mapper.readValue(responseBody, java.util.Map.class);
+                    accessToken = (String) jsonMap.get("access_token");
+                } catch (Exception e) {
+                    log.warn("解析JSON失败: {}", e.getMessage());
+                }
+            }
+
+            // 如果JSON没解析到，尝试表单格式
+            if (accessToken == null) {
+                log.info("尝试解析表单格式响应");
+                String[] pairs = responseBody.split("&");
+                for (String pair : pairs) {
+                    String[] keyValue = pair.split("=", 2);
+                    if (keyValue.length == 2 && "access_token".equals(keyValue[0])) {
+                        accessToken = keyValue[1];
+                        break;
+                    }
+                }
+            }
+
+            if (accessToken == null) {
+                log.error("GitHub响应中未找到access_token. 响应内容: {}", responseBody);
+                throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "获取GitHub访问令牌失败，响应中未找到access_token");
+            }
+
+            log.info("成功解析GitHub access_token, 长度: {}", accessToken.length());
+            return accessToken;
         } catch (BusinessException e) {
             throw e;
         } catch (Exception e) {
             log.error("换取GitHub access_token失败", e);
-            throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "获取GitHub访问令牌失败");
+            throw new BusinessException(ErrorCode.GITHUB_AUTH_FAILED, "获取GitHub访问令牌失败: " + e.getMessage());
         }
     }
 
@@ -394,31 +525,54 @@ public class OAuthServiceImpl implements OAuthService {
      */
     private GitHubUserInfo fetchGitHubUserInfo(String accessToken) {
         try {
+            log.info("开始获取GitHub用户信息, accessToken长度: {}", accessToken != null ? accessToken.length() : 0);
+
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(accessToken);
+            if (accessToken != null) {
+                headers.setBearerAuth(accessToken);
+            }
             headers.set("Accept", "application/vnd.github.v3+json");
 
             HttpEntity<Void> request = new HttpEntity<>(headers);
 
-            ResponseEntity<GitHubUserInfo> response = restTemplate.exchange(
+            log.info("请求GitHub用户信息API: {}", gitHubOAuthProperties.getUserInfoUrl());
+
+            ResponseEntity<String> stringResponse = restTemplate.exchange(
                     gitHubOAuthProperties.getUserInfoUrl(),
                     HttpMethod.GET,
                     request,
-                    GitHubUserInfo.class
+                    String.class
             );
 
-            GitHubUserInfo userInfo = response.getBody();
-            if (userInfo == null) {
+            String responseBody = stringResponse.getBody();
+            log.info("GitHub返回原始响应: {}", responseBody);
+
+            if (responseBody == null || responseBody.isEmpty()) {
                 log.error("GitHub返回的用户信息为空");
                 throw new BusinessException(ErrorCode.OAUTH_USER_INFO_ERROR, "获取GitHub用户信息失败");
             }
+
+            // 手动解析JSON
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            java.util.Map<String, Object> jsonMap = mapper.readValue(responseBody, java.util.Map.class);
+
+            GitHubUserInfo userInfo = new GitHubUserInfo();
+            userInfo.setId(((Number) jsonMap.get("id")).longValue());
+            userInfo.setLogin((String) jsonMap.get("login"));
+            userInfo.setName((String) jsonMap.get("name"));
+            userInfo.setEmail((String) jsonMap.get("email"));
+            userInfo.setAvatarUrl((String) jsonMap.get("avatar_url"));
+            userInfo.setBio((String) jsonMap.get("bio"));
+
+            log.info("成功解析GitHub用户信息: ID={}, Login={}, AvatarUrl={}",
+                    userInfo.getId(), userInfo.getLogin(), userInfo.getAvatarUrl());
 
             return userInfo;
         } catch (BusinessException e) {
             throw e;
         } catch (Exception e) {
             log.error("获取GitHub用户信息失败", e);
-            throw new BusinessException(ErrorCode.OAUTH_USER_INFO_ERROR, "获取GitHub用户信息失败");
+            throw new BusinessException(ErrorCode.OAUTH_USER_INFO_ERROR, "获取GitHub用户信息失败: " + e.getMessage());
         }
     }
 
@@ -476,6 +630,9 @@ public class OAuthServiceImpl implements OAuthService {
         userInfo.setUsername(sysUser.getUsername());
         userInfo.setEmail(sysUser.getEmail());
         userInfo.setNickname(sysUser.getNickname());
+        userInfo.setAvatarName(sysUser.getAvatarName());
+        userInfo.setAvatarSize(sysUser.getAvatarSize());
+        userInfo.setAvatarUrl(sysUser.getAvatarUrl());
         return userInfo;
     }
 

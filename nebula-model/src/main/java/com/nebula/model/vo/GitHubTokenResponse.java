@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class GitHubTokenResponse {
-    private String access_token;
-    private String token_type;
+    private String accessToken;
+    private String tokenType;
     private String scope;
 }

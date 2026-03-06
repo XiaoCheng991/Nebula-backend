@@ -39,5 +39,14 @@ public class LoginVO {
 
         @Schema(description = "昵称")
         private String nickname;
+
+        @Schema(description = "头像文件名")
+        private String avatarName;
+
+        @Schema(description = "头像大小(字节)")
+        private Long avatarSize;
+
+        @Schema(description = "头像URL")
+        private String avatarUrl;
     }
 }

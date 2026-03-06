@@ -116,10 +116,18 @@ public class OAuthController {
     }
 
     @PostMapping("/github/confirm")
-    @Operation(summary = "确认GitHub OAuth登录")
+    @Operation(summary = "确认GitHub OAuth登录（新用户）")
     public Result<LoginVO> confirmGitHubLogin(@Valid @RequestBody GitHubOAuthConfirmDTO confirmDTO) {
         log.info("收到GitHub OAuth确认登录请求");
         LoginVO loginVO = oAuthService.confirmGitHubLogin(confirmDTO);
+        return Result.success("登录成功", loginVO);
+    }
+
+    @PostMapping("/github/login-existing")
+    @Operation(summary = "GitHub老用户直接登录")
+    public Result<LoginVO> loginGitHubExistingUser(@RequestParam("tempToken") String tempToken) {
+        log.info("收到GitHub老用户直接登录请求, tempToken: {}", tempToken);
+        LoginVO loginVO = oAuthService.loginGitHubExistingUser(tempToken);
         return Result.success("登录成功", loginVO);
     }
 }

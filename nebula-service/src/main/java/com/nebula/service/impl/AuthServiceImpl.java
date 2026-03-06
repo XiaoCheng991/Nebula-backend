@@ -45,18 +45,18 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public LoginVO login(LoginDTO loginDTO) {
-        // 查找用户（通过邮箱）
-        SysUser sysUser = findUserByEmail(loginDTO.getEmail());
+        // 查找用户（通过用户名或邮箱）
+        SysUser sysUser = findUserByAccount(loginDTO.getAccount());
 
         // 验证密码
         if (!passwordEncoder.matches(loginDTO.getPassword(), sysUser.getPassword())) {
-            LogUtil.Auth.loginFailed(log, loginDTO.getEmail(), "密码错误");
+            LogUtil.Auth.loginFailed(log, loginDTO.getAccount(), "密码错误");
             throw new BusinessException(ErrorCode.PASSWORD_ERROR);
         }
 
         // 检查用户状态
         if (sysUser.getAccountStatus() == 0) {
-            LogUtil.Auth.loginFailed(log, loginDTO.getEmail(), "账号已被禁用");
+            LogUtil.Auth.loginFailed(log, loginDTO.getAccount(), "账号已被禁用");
             throw new BusinessException(ErrorCode.USER_DISABLED);
         }
 
@@ -235,15 +235,15 @@ public class AuthServiceImpl implements AuthService {
     // ==================== 私有方法 ====================
 
     /**
-     * 根据邮箱查找用户
+     * 根据用户名或邮箱查找用户
      */
-    private SysUser findUserByEmail(String email) {
+    private SysUser findUserByAccount(String account) {
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SysUser::getEmail, email);
+        wrapper.and(w -> w.eq(SysUser::getEmail, account).or().eq(SysUser::getUsername, account));
         SysUser sysUser = sysUserMapper.selectOne(wrapper);
 
         if (sysUser == null) {
-            LogUtil.Auth.loginFailed(log, email, "用户不存在");
+            LogUtil.Auth.loginFailed(log, account, "用户不存在");
             throw new BusinessException(ErrorCode.USER_NOT_FOUND);
         }
 
@@ -326,6 +326,9 @@ public class AuthServiceImpl implements AuthService {
         userInfo.setUsername(sysUser.getUsername());
         userInfo.setEmail(sysUser.getEmail());
         userInfo.setNickname(sysUser.getNickname());
+        userInfo.setAvatarName(sysUser.getAvatarName());
+        userInfo.setAvatarSize(sysUser.getAvatarSize());
+        userInfo.setAvatarUrl(sysUser.getAvatarUrl());
         return userInfo;
     }
 

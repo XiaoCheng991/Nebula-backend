@@ -35,6 +35,14 @@ public interface OAuthService {
     LoginVO confirmGitHubLogin(GitHubOAuthConfirmDTO confirmDTO);
 
     /**
+     * 老用户直接登录（无需确认）
+     *
+     * @param tempToken 临时token
+     * @return 登录响应
+     */
+    LoginVO loginGitHubExistingUser(String tempToken);
+
+    /**
      * 获取GitHub授权URL
      *
      * @param state 随机状态码，用于防止CSRF攻击
