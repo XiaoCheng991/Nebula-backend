@@ -59,7 +59,7 @@ mybatis-plus:
   type-aliases-package: com.nebula.model.entity
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       id-type: auto
@@ -94,7 +94,7 @@ logging:
   level:
     root: OFF
     com.nebula: debug
-    org.springframework.web: info
+    org.springframework.web: debug
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
 
