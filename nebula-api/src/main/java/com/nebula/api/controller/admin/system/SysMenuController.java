@@ -1,10 +1,9 @@
 package com.nebula.api.controller.admin.system;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.nebula.common.annotation.OperationLog;
 import com.nebula.common.annotation.RequirePermission;
-import com.nebula.config.config.JwtProperties;
 import com.nebula.config.result.Result;
-import com.nebula.config.util.SecurityContext;
 import com.nebula.model.entity.system.SysMenu;
 import com.nebula.service.service.system.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +22,6 @@ import java.util.List;
 public class SysMenuController {
 
     private final SysMenuService sysMenuService;
-    private final JwtProperties jwtProperties;
 
     @GetMapping("/list")
     @Operation(summary = "获取菜单列表")
@@ -46,10 +44,8 @@ public class SysMenuController {
     @Operation(summary = "获取当前用户的菜单树")
     @RequirePermission("system:menu:query")
     public Result<List<SysMenu>> getUserMenuTree() {
-        Long userId = SecurityContext.getCurrentUserId(jwtProperties.getSecret());
-        if (userId == null) {
-            return Result.error("请先登录");
-        }
+        StpUtil.checkLogin();
+        Long userId = StpUtil.getLoginIdAsLong();
         List<SysMenu> menus = sysMenuService.getMenuListByUserId(userId);
         List<SysMenu> tree = sysMenuService.buildMenuTree(menus);
         return Result.success(tree);

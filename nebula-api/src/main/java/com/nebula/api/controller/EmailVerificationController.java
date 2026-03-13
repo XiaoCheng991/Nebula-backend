@@ -1,16 +1,16 @@
 package com.nebula.api.controller;
 
-import com.nebula.common.util.JwtUtil;
-import com.nebula.config.config.JwtProperties;
+import cn.dev33.satoken.stp.StpUtil;
 import com.nebula.config.result.Result;
 import com.nebula.model.dto.EmailVerificationDTO;
 import com.nebula.model.dto.SendEmailVerificationDTO;
 import com.nebula.model.dto.VerifyEmailDTO;
+import com.nebula.model.entity.SysUser;
+import com.nebula.service.mapper.SysUserMapper;
 import com.nebula.service.service.EmailVerificationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class EmailVerificationController {
 
     private final EmailVerificationService emailVerificationService;
-    private final JwtProperties jwtProperties;
+    private final SysUserMapper sysUserMapper;
 
     @PostMapping("/send-verification")
     @Operation(summary = "发送邮箱验证邮件", description = "向指定邮箱发送验证邮件")
@@ -64,11 +64,9 @@ public class EmailVerificationController {
     @GetMapping("/status")
     @Operation(summary = "检查邮箱验证状态", description = "检查当前用户的邮箱是否已验证",
             security = @SecurityRequirement(name = "Authorization"))
-    public Result<Boolean> checkEmailStatus(HttpServletRequest request) {
-        Long userId = getCurrentUserId(request);
-        if (userId == null) {
-            return Result.error("请先登录");
-        }
+    public Result<Boolean> checkEmailStatus() {
+        StpUtil.checkLogin();
+        Long userId = StpUtil.getLoginIdAsLong();
         boolean verified = emailVerificationService.isEmailVerified(userId);
         return Result.success(verified);
     }
@@ -76,40 +74,17 @@ public class EmailVerificationController {
     @PostMapping("/resend")
     @Operation(summary = "重新发送验证邮件", description = "重新发送邮箱验证邮件",
             security = @SecurityRequirement(name = "Authorization"))
-    public Result<Void> resendVerificationEmail(HttpServletRequest request) {
-        // 从请求中获取用户邮箱
-        // 这里简化处理，实际应该从用户信息中获取邮箱
-        String email = getCurrentUserEmail(request);
+    public Result<Void> resendVerificationEmail() {
+        StpUtil.checkLogin();
+        Long userId = StpUtil.getLoginIdAsLong();
+
+        SysUser user = sysUserMapper.selectById(userId);
+        String email = user != null ? user.getEmail() : null;
         if (email == null) {
             return Result.error("请先登录");
         }
 
         emailVerificationService.resendVerificationEmail(email);
         return Result.success("验证邮件已重新发送");
-    }
-
-    /**
-     * 从请求中获取当前用户ID
-     */
-    private Long getCurrentUserId(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token == null || !token.startsWith("Bearer ")) {
-            return null;
-        }
-        token = token.substring(7);
-        try {
-            return JwtUtil.getUserIdFromToken(token, jwtProperties.getSecret());
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
-     * 从请求中获取当前用户邮箱
-     */
-    private String getCurrentUserEmail(HttpServletRequest request) {
-        // 简化处理，实际应该从数据库查询用户信息
-        // 这里仅作示例
-        return null;
     }
 }

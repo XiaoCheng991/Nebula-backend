@@ -1,14 +1,13 @@
 package com.nebula.api.controller.admin.system;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nebula.common.annotation.OperationLog;
 import com.nebula.common.annotation.RequirePermission;
 import com.nebula.common.constant.AdminConstants;
-import com.nebula.config.config.JwtProperties;
 import com.nebula.config.result.Result;
-import com.nebula.config.util.SecurityContext;
 import com.nebula.model.entity.SysUser;
 import com.nebula.service.service.system.SysRoleService;
 import com.nebula.service.service.system.SysUserAdminService;
@@ -28,7 +27,6 @@ public class SysUserAdminController {
 
     private final SysUserAdminService sysUserAdminService;
     private final SysRoleService sysRoleService;
-    private final JwtProperties jwtProperties;
 
     @GetMapping("/list")
     @Operation(summary = "获取用户列表")
@@ -62,10 +60,8 @@ public class SysUserAdminController {
     @Operation(summary = "获取当前登录用户信息")
     @RequirePermission("system:user:query")
     public Result<SysUser> getCurrentUser() {
-        Long userId = SecurityContext.getCurrentUserId(jwtProperties.getSecret());
-        if (userId == null) {
-            return Result.error("请先登录");
-        }
+        StpUtil.checkLogin();
+        Long userId = StpUtil.getLoginIdAsLong();
         return Result.success(sysUserAdminService.getById(userId));
     }
 
@@ -120,7 +116,8 @@ public class SysUserAdminController {
     @RequirePermission("system:user:delete")
     @OperationLog(module = "用户管理", operation = "删除用户")
     public Result<Void> delete(@PathVariable Long userId) {
-        Long currentUserId = SecurityContext.getCurrentUserId(jwtProperties.getSecret());
+        StpUtil.checkLogin();
+        Long currentUserId = StpUtil.getLoginIdAsLong();
         if (isSuperAdmin(currentUserId) && currentUserId != null && currentUserId.equals(userId)) {
             return Result.error("不能删除当前登录的超级管理员账号");
         }

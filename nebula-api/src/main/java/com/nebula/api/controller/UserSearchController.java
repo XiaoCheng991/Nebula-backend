@@ -1,8 +1,7 @@
 package com.nebula.api.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.nebula.common.util.JwtUtil;
-import com.nebula.config.config.JwtProperties;
 import com.nebula.config.result.Result;
 import com.nebula.model.vo.UserVO;
 import com.nebula.service.service.UserSearchService;
@@ -10,7 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +28,6 @@ import java.util.List;
 public class UserSearchController {
 
     private final UserSearchService userSearchService;
-    private final JwtProperties jwtProperties;
 
     @GetMapping("/search")
     @Operation(summary = "搜索用户", description = "根据关键词搜索用户，支持用户名、昵称、邮箱搜索",
@@ -85,32 +82,14 @@ public class UserSearchController {
     @GetMapping("/current")
     @Operation(summary = "获取当前用户信息", description = "获取当前登录用户的详细信息",
             security = @SecurityRequirement(name = "Authorization"))
-    public Result<UserVO> getCurrentUser(HttpServletRequest request) {
-        Long userId = getCurrentUserId(request);
-        if (userId == null) {
-            return Result.error("请先登录");
-        }
+    public Result<UserVO> getCurrentUser() {
+        StpUtil.checkLogin();
+        Long userId = StpUtil.getLoginIdAsLong();
 
         UserVO user = userSearchService.getUserById(userId);
         if (user == null) {
             return Result.error("用户不存在");
         }
         return Result.success(user);
-    }
-
-    /**
-     * 从请求中获取当前用户ID
-     */
-    private Long getCurrentUserId(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token == null || !token.startsWith("Bearer ")) {
-            return null;
-        }
-        token = token.substring(7);
-        try {
-            return JwtUtil.getUserIdFromToken(token, jwtProperties.getSecret());
-        } catch (Exception e) {
-            return null;
-        }
     }
 }

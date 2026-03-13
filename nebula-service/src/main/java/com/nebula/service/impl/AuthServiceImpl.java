@@ -1,30 +1,27 @@
 package com.nebula.service.impl;
 
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.nebula.common.constant.RedisKey;
+import com.nebula.common.constant.AdminConstants;
 import com.nebula.common.exception.BusinessException;
 import com.nebula.common.exception.ErrorCode;
-import com.nebula.common.util.JwtUtil;
 import com.nebula.common.util.LogUtil;
-import com.nebula.config.config.JwtProperties;
 import com.nebula.model.dto.LoginDTO;
 import com.nebula.model.dto.RegisterDTO;
-import com.nebula.common.constant.AdminConstants;
 import com.nebula.model.entity.SysUser;
 import com.nebula.model.entity.system.SysUserRole;
 import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
 import com.nebula.service.mapper.system.SysUserRoleMapper;
 import com.nebula.service.service.AuthService;
-import com.nebula.service.service.TokenStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,46 +35,41 @@ public class AuthServiceImpl implements AuthService {
 
     private final SysUserMapper sysUserMapper;
     private final PasswordEncoder passwordEncoder;
-    private final TokenStorageService tokenStorageService;
-    private final JwtProperties jwtProperties;
     private final SysUserRoleMapper sysUserRoleMapper;
 
     @Override
     @Transactional
-    public LoginVO login(LoginDTO loginDTO) {
+    public SaResult login(LoginDTO loginDTO) {
         // 查找用户（通过用户名或邮箱）
         SysUser sysUser = findUserByAccount(loginDTO.getAccount());
 
         // 验证密码
         if (!passwordEncoder.matches(loginDTO.getPassword(), sysUser.getPassword())) {
             LogUtil.Auth.loginFailed(log, loginDTO.getAccount(), "密码错误");
+            SaResult.error("密码错误");
             throw new BusinessException(ErrorCode.PASSWORD_ERROR);
         }
 
         // 检查用户状态
         if (sysUser.getAccountStatus() == 0) {
             LogUtil.Auth.loginFailed(log, loginDTO.getAccount(), "账号已被禁用");
+            SaResult.error("账号已被禁用");
             throw new BusinessException(ErrorCode.USER_DISABLED);
         }
 
-        // 生成 Token
-        TokenPair tokens = generateTokens(sysUser);
+        // 使用 Sa-Token 进行登录，服务端会写入会话
+        StpUtil.login(sysUser.getId());
 
-        // 保存 Token 到 Redis
-        long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
-        long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
-        tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
-
-        // 更新最后登录时间
-        sysUser.setLastLoginAt(OffsetDateTime.now());
-        sysUserMapper.updateById(sysUser);
-        LogUtil.Database.update(log, "sys_user", sysUser.getId());
-
-        // 构建返回结果
-        LoginVO loginVO = buildLoginVO(sysUser, tokens.accessToken(), tokens.refreshToken());
+        // 返回兼容前端结构，便于沿用既有解析逻辑
+        String token = StpUtil.getTokenValue();
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("token", token);
+        payload.put("expiresIn", 0);
+        payload.put("userInfo", buildUserInfo(sysUser));
 
         LogUtil.Auth.loginSuccess(log, sysUser.getId(), sysUser.getEmail());
-        return loginVO;
+
+        return SaResult.data(payload);
     }
 
     @Override
@@ -103,16 +95,12 @@ public class AuthServiceImpl implements AuthService {
         // 分配默认普通用户角色
         assignDefaultRoleToUser(sysUser.getId());
 
-        // 生成 Token
-        TokenPair tokens = generateTokens(sysUser);
+        // 注册后直接创建 Sa-Token 会话
+        StpUtil.login(sysUser.getId());
+        String token = StpUtil.getTokenValue();
 
-        // 保存 Token 到 Redis
-        long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
-        long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
-        tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
-
-        // 构建返回结果
-        LoginVO loginVO = buildLoginVO(sysUser, tokens.accessToken(), tokens.refreshToken());
+        // 构建返回结果（兼容前端字段）
+        LoginVO loginVO = buildLoginVO(sysUser, token, "");
 
         LogUtil.Auth.registerSuccess(log, sysUser.getId(), sysUser.getEmail(), sysUser.getUsername());
         return loginVO;
@@ -135,7 +123,8 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException(ErrorCode.UNAUTHORIZED);
         }
 
-        tokenStorageService.deleteTokens(userId);
+        // 清理 Sa-Token 会话
+        StpUtil.logout(userId);
         LogUtil.Auth.logout(log, userId);
     }
 
@@ -143,12 +132,6 @@ public class AuthServiceImpl implements AuthService {
     public LoginVO.UserInfo getUserInfo(Long userId) {
         if (userId == null) {
             throw new BusinessException(ErrorCode.UNAUTHORIZED);
-        }
-
-        // 检查 Token 是否有效
-        String currentToken = tokenStorageService.getAccessToken(userId);
-        if (currentToken == null) {
-            throw new BusinessException(ErrorCode.TOKEN_EXPIRED);
         }
 
         // 查询用户信息
@@ -159,77 +142,6 @@ public class AuthServiceImpl implements AuthService {
 
         LogUtil.Auth.getUserInfo(log, userId);
         return buildUserInfo(sysUser);
-    }
-
-    @Override
-    public Long validateToken(String token) {
-        if (token == null || token.trim().isEmpty()) {
-            throw new BusinessException(ErrorCode.TOKEN_MISSING);
-        }
-
-        // 清理 token 字符串
-        token = token.trim();
-        if (token.startsWith("Bearer ")) {
-            token = token.substring(7).trim();
-        }
-
-        // 验证 Token 是否有效
-        if (!tokenStorageService.validateAccessToken(token)) {
-            LogUtil.Auth.tokenValidateFailed(log, token, "Token已过期或无效");
-            throw new BusinessException(ErrorCode.TOKEN_EXPIRED);
-        }
-
-        return tokenStorageService.getUserIdByAccessToken(token);
-    }
-
-    @Override
-    @Transactional
-    public LoginVO refreshToken(String refreshToken) {
-        if (refreshToken == null || refreshToken.trim().isEmpty()) {
-            throw new BusinessException(ErrorCode.REFRESH_TOKEN_INVALID);
-        }
-
-        refreshToken = refreshToken.trim();
-
-        // 验证 Refresh Token
-        Long userId = tokenStorageService.getUserIdByRefreshToken(refreshToken);
-        if (userId == null) {
-            LogUtil.Auth.tokenRefreshFailed(log, "Refresh Token已过期或无效");
-            throw new BusinessException(ErrorCode.REFRESH_TOKEN_EXPIRED);
-        }
-
-        // 查询用户信息
-        SysUser sysUser = sysUserMapper.selectById(userId);
-        if (sysUser == null || sysUser.getDeleted() == 1 || sysUser.getAccountStatus() == 0) {
-            LogUtil.Auth.tokenRefreshFailed(log, "用户不存在或已被禁用");
-            throw new BusinessException(ErrorCode.USER_NOT_FOUND);
-        }
-
-        // 获取旧的 Token
-        String oldAccessToken = tokenStorageService.getAccessToken(userId);
-        String oldRefreshToken = tokenStorageService.getRefreshToken(userId);
-
-        // 生成新的 Token
-        TokenPair newTokens = generateTokens(sysUser);
-
-        // 更新 Redis 中的 Token
-        long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
-        long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
-        tokenStorageService.updateTokens(
-                userId,
-                oldAccessToken,
-                newTokens.accessToken(),
-                oldRefreshToken,
-                newTokens.refreshToken(),
-                accessTtl,
-                refreshTtl
-        );
-
-        // 构建返回结果
-        LoginVO loginVO = buildLoginVO(sysUser, newTokens.accessToken(), newTokens.refreshToken());
-
-        LogUtil.Auth.tokenRefreshSuccess(log, userId);
-        return loginVO;
     }
 
     // ==================== 私有方法 ====================
@@ -282,31 +194,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
-     * 生成 Token 对
-     */
-    private TokenPair generateTokens(SysUser sysUser) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", sysUser.getId());
-        claims.put("email", sysUser.getEmail());
-        claims.put("type", "access");
-
-        String accessToken = JwtUtil.generateAccessToken(
-                claims,
-                jwtProperties.getSecret(),
-                jwtProperties.getAccessTokenExpiration()
-        );
-
-        claims.put("type", "refresh");
-        String refreshToken = JwtUtil.generateRefreshToken(
-                claims,
-                jwtProperties.getSecret(),
-                jwtProperties.getRefreshTokenExpiration()
-        );
-
-        return new TokenPair(accessToken, refreshToken);
-    }
-
-    /**
      * 构建登录返回结果
      */
     private LoginVO buildLoginVO(SysUser sysUser, String accessToken, String refreshToken) {
@@ -332,9 +219,4 @@ public class AuthServiceImpl implements AuthService {
         return userInfo;
     }
 
-    /**
-     * Token 对（不可变记录类）
-     */
-    private record TokenPair(String accessToken, String refreshToken) {
-    }
 }

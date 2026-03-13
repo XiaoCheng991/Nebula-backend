@@ -1,11 +1,10 @@
 package com.nebula.api.interceptor;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.nebula.common.annotation.RequirePermission;
 import com.nebula.common.constant.AdminConstants;
 import com.nebula.common.exception.BusinessException;
 import com.nebula.common.exception.ErrorCode;
-import com.nebula.config.config.JwtProperties;
-import com.nebula.config.util.SecurityContext;
 import com.nebula.service.service.system.PermissionService;
 import com.nebula.service.service.system.SysRoleService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ import java.lang.reflect.Method;
 @RequiredArgsConstructor
 public class PermissionInterceptor implements HandlerInterceptor {
 
-    private final JwtProperties jwtProperties;
     private final SysRoleService sysRoleService;
     private final PermissionService permissionService;
 
@@ -36,7 +34,14 @@ public class PermissionInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         Class<?> clazz = method.getDeclaringClass();
 
-        Long userId = SecurityContext.getCurrentUserId(jwtProperties.getSecret());
+        Long userId;
+        try {
+            StpUtil.checkLogin();
+            userId = StpUtil.getLoginIdAsLong();
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.UNAUTHORIZED);
+        }
+
         if (isSuperAdmin(userId)) {
             return true;
         }

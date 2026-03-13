@@ -1,12 +1,10 @@
 package com.nebula.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.nebula.common.constant.AdminConstants;
-import com.nebula.common.constant.RedisKey;
 import com.nebula.common.exception.BusinessException;
 import com.nebula.common.exception.ErrorCode;
-import com.nebula.common.util.JwtUtil;
-import com.nebula.config.config.JwtProperties;
 import com.nebula.config.config.MinioConfig;
 import com.nebula.config.properties.GitHubOAuthProperties;
 import com.nebula.config.util.MinioUtil;
@@ -20,7 +18,6 @@ import com.nebula.model.vo.LoginVO;
 import com.nebula.service.mapper.SysUserMapper;
 import com.nebula.service.mapper.system.SysUserRoleMapper;
 import com.nebula.service.service.OAuthService;
-import com.nebula.service.service.TokenStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -52,9 +49,7 @@ public class OAuthServiceImpl implements OAuthService {
 
     private final SysUserMapper sysUserMapper;
     private final PasswordEncoder passwordEncoder;
-    private final TokenStorageService tokenStorageService;
     private final GitHubOAuthProperties gitHubOAuthProperties;
-    private final JwtProperties jwtProperties;
     private final RestTemplate restTemplate;
     private final RedisTemplate<String, Object> redisTemplate;
     private final SysUserRoleMapper sysUserRoleMapper;
@@ -206,19 +201,15 @@ public class OAuthServiceImpl implements OAuthService {
             SysUser sysUser = findOrCreateUser(githubId, username, nickname, email, avatarUrl, bio, isNewUser);
             log.info("用户处理完成, 用户ID: {}, 用户名: {}", sysUser.getId(), sysUser.getUsername());
 
-            // 6. 生成 Token 对
-            TokenPair tokens = generateTokens(sysUser);
+            // 6. 创建 Sa-Token 会话
+            StpUtil.login(sysUser.getId());
+            String token = StpUtil.getTokenValue();
 
-            // 7. 保存 Token 到 Redis
-            long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
-            long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
-            tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
-
-            // 8. 更新用户最后登录时间
+            // 7. 更新用户最后登录时间
             updateUserLoginInfo(sysUser);
 
-            // 9. 构建返回结果
-            LoginVO loginVO = buildLoginVO(sysUser, tokens.accessToken(), tokens.refreshToken());
+            // 8. 构建返回结果（兼容前端字段）
+            LoginVO loginVO = buildLoginVO(sysUser, token, "");
             log.info("GitHub OAuth登录成功, 用户ID: {}", sysUser.getId());
 
             return loginVO;
@@ -253,7 +244,6 @@ public class OAuthServiceImpl implements OAuthService {
 
             // 3. 提取GitHub用户信息
             Long githubId = ((Number) tempData.get("githubId")).longValue();
-            String githubLogin = (String) tempData.get("githubLogin");
             String avatarUrl = (String) tempData.get("avatarUrl");
             boolean isNewUser = (Boolean) tempData.get("isNewUser");
 
@@ -292,19 +282,15 @@ public class OAuthServiceImpl implements OAuthService {
                 sysUserMapper.updateById(sysUser);
             }
 
-            // 6. 生成 Token 对
-            TokenPair tokens = generateTokens(sysUser);
+            // 6. 创建 Sa-Token 会话
+            StpUtil.login(sysUser.getId());
+            String token = StpUtil.getTokenValue();
 
-            // 7. 保存 Token 到 Redis
-            long accessTtl = RedisKey.Token.getAccessTokenTtlSeconds(jwtProperties.getAccessTokenExpiration());
-            long refreshTtl = RedisKey.Token.getRefreshTokenTtlSeconds(jwtProperties.getRefreshTokenExpiration());
-            tokenStorageService.saveTokens(sysUser.getId(), tokens.accessToken(), tokens.refreshToken(), accessTtl, refreshTtl);
-
-            // 8. 更新用户最后登录时间
+            // 7. 更新用户最后登录时间
             updateUserLoginInfo(sysUser);
 
-            // 9. 构建返回结果
-            LoginVO loginVO = buildLoginVO(sysUser, tokens.accessToken(), tokens.refreshToken());
+            // 8. 构建返回结果（兼容前端字段）
+            LoginVO loginVO = buildLoginVO(sysUser, token, "");
             log.info("GitHub老用户直接登录成功, 用户ID: {}", sysUser.getId());
 
             return loginVO;
@@ -471,6 +457,7 @@ public class OAuthServiceImpl implements OAuthService {
             if (responseBody.trim().startsWith("{")) {
                 try {
                     com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+                    @SuppressWarnings("unchecked")
                     java.util.Map<String, Object> jsonMap = mapper.readValue(responseBody, java.util.Map.class);
                     accessToken = (String) jsonMap.get("access_token");
                 } catch (Exception e) {
@@ -532,6 +519,7 @@ public class OAuthServiceImpl implements OAuthService {
 
             // 手动解析JSON
             com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            @SuppressWarnings("unchecked")
             java.util.Map<String, Object> jsonMap = mapper.readValue(responseBody, java.util.Map.class);
 
             GitHubUserInfo userInfo = new GitHubUserInfo();
@@ -549,31 +537,6 @@ public class OAuthServiceImpl implements OAuthService {
             log.error("获取GitHub用户信息失败", e);
             throw new BusinessException(ErrorCode.OAUTH_USER_INFO_ERROR, "获取GitHub用户信息失败: " + e.getMessage());
         }
-    }
-
-    /**
-     * 生成 Token 对
-     */
-    private TokenPair generateTokens(SysUser sysUser) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", sysUser.getId());
-        claims.put("email", sysUser.getEmail());
-        claims.put("type", "access");
-
-        String accessToken = JwtUtil.generateAccessToken(
-                claims,
-                jwtProperties.getSecret(),
-                jwtProperties.getAccessTokenExpiration()
-        );
-
-        claims.put("type", "refresh");
-        String refreshToken = JwtUtil.generateRefreshToken(
-                claims,
-                jwtProperties.getSecret(),
-                jwtProperties.getRefreshTokenExpiration()
-        );
-
-        return new TokenPair(accessToken, refreshToken);
     }
 
     /**
@@ -609,12 +572,6 @@ public class OAuthServiceImpl implements OAuthService {
         userInfo.setAvatarSize(sysUser.getAvatarSize());
         userInfo.setAvatarUrl(sysUser.getAvatarUrl());
         return userInfo;
-    }
-
-    /**
-     * Token 对（不可变记录类）
-     */
-    private record TokenPair(String accessToken, String refreshToken) {
     }
 
     @Override
