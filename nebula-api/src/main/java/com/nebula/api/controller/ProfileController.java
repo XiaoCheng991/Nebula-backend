@@ -40,8 +40,10 @@ public class ProfileController {
             }
 
             UserProfileVO profileVO = new UserProfileVO();
+            profileVO.setId(sysUser.getId());
             profileVO.setUsername(sysUser.getUsername());
-            profileVO.setDisplayName(sysUser.getNickname());
+            profileVO.setEmail(sysUser.getEmail());
+            profileVO.setNickname(sysUser.getNickname());
             profileVO.setAvatar(sysUser.getAvatarUrl());
             profileVO.setBio(sysUser.getBio());
 
@@ -66,7 +68,7 @@ public class ProfileController {
             }
 
             // 更新用户信息
-            sysUser.setNickname(profileVO.getDisplayName());
+            sysUser.setNickname(profileVO.getNickname());
             sysUser.setAvatarUrl(profileVO.getAvatar());
             sysUser.setBio(profileVO.getBio());
             sysUser.setUpdateTime(OffsetDateTime.now());
@@ -115,11 +117,17 @@ public class ProfileController {
     @Data
     @io.swagger.v3.oas.annotations.media.Schema(description = "用户档案")
     public static class UserProfileVO {
+        @io.swagger.v3.oas.annotations.media.Schema(description = "用户ID")
+        private Long id;
+
         @io.swagger.v3.oas.annotations.media.Schema(description = "用户名")
         private String username;
 
-        @io.swagger.v3.oas.annotations.media.Schema(description = "显示名称")
-        private String displayName;
+        @io.swagger.v3.oas.annotations.media.Schema(description = "邮箱")
+        private String email;
+
+        @io.swagger.v3.oas.annotations.media.Schema(description = "昵称")
+        private String nickname;
 
         @io.swagger.v3.oas.annotations.media.Schema(description = "头像URL")
         private String avatar;

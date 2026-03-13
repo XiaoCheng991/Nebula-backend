@@ -32,9 +32,6 @@ public class SysUser extends BaseEntity {
     @Schema(description = "昵称")
     private String nickname;
 
-    @Schema(description = "显示名称")
-    private String displayName;
-
     @Schema(description = "头像文件名称")
     private String avatarName;
 
