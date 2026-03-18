@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,6 +44,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Override
     public List<SysMenu> buildMenuTree(List<SysMenu> menus) {
+        // 构建 id -> name 映射，用于填充 parentName
+        Map<Long, String> nameMap = menus.stream()
+                .filter(m -> m.getId() != null)
+                .collect(Collectors.toMap(SysMenu::getId, m -> m.getMenuName() != null ? m.getMenuName() : ""));
+        for (SysMenu menu : menus) {
+            if (menu.getParentId() != null && menu.getParentId() > 0) {
+                menu.setParentName(nameMap.get(menu.getParentId()));
+            }
+        }
+
         List<SysMenu> tree = new ArrayList<>();
         for (SysMenu menu : menus) {
             if (menu.getParentId() == null || menu.getParentId() == 0) {

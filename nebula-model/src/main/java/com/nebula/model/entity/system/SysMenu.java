@@ -49,6 +49,10 @@ public class SysMenu extends BaseEntity {
     private Boolean isSystem;
 
     @TableField(exist = false)
+    @Schema(description = "父菜单名称")
+    private String parentName;
+
+    @TableField(exist = false)
     @Schema(description = "子菜单")
     private List<SysMenu> children;
 }
