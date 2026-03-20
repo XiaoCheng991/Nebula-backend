@@ -1,0 +1,91 @@
+{
+  "version": "1.0",
+  "projectType": "java-spring-boot",
+  "settings": {
+    "quality": "balanced",
+    "executionMode": "sequential",
+    "gitTracking": "per-phase",
+    "maxConcurrentTasks": 1
+  },
+  "agents": {
+    "planner": {
+      "enabled": true,
+      "role": "task_planning_and_decomposition"
+    },
+    "coder": {
+      "enabled": true,
+      "role": "code_implementation"
+    },
+    "reviewer": {
+      "enabled": true,
+      "role": "code_review_and_quality_assurance"
+    },
+    "tester": {
+      "enabled": true,
+      "role": "test_creation_and_validation"
+    },
+    "docwriter": {
+      "enabled": true,
+      "role": "documentation_and_comments"
+    }
+  },
+  "phases": [
+    {
+      "name": "analysis",
+      "description": "代码库分析和需求理解",
+      "agents": ["planner", "reviewer"],
+      "gitCommit": true
+    },
+    {
+      "name": "planning",
+      "description": "任务分解和方案规划",
+      "agents": ["planner"],
+      "gitCommit": true
+    },
+    {
+      "name": "implementation",
+      "description": "代码实现",
+      "agents": ["coder", "docwriter"],
+      "gitCommit": true
+    },
+    {
+      "name": "testing",
+      "description": "测试创建和验证",
+      "agents": ["tester", "reviewer"],
+      "gitCommit": true
+    },
+    {
+      "name": "review",
+      "description": "代码审查和优化",
+      "agents": ["reviewer", "coder"],
+      "gitCommit": true
+    }
+  ],
+  "javaConfig": {
+    "javaVersion": "21",
+    "buildTool": "maven",
+    "framework": "spring-boot-3",
+    "modules": [
+      "nebula-common",
+      "nebula-model",
+      "nebula-config",
+      "nebula-service",
+      "nebula-api",
+      "nebula-admin"
+    ],
+    "keyDependencies": [
+      "mybatis-plus",
+      "spring-cloud",
+      "hutool",
+      "fastjson2",
+      "knife4j",
+      "jwt"
+    ]
+  },
+  "codeQuality": {
+    "enforceConventions": true,
+    "requireCodeReview": true,
+    "runStaticAnalysis": true,
+    "generateTests": true
+  }
+}
