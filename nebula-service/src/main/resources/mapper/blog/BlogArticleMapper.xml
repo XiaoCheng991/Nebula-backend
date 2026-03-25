@@ -27,4 +27,93 @@
         <result column="deleted" property="deleted"/>
     </resultMap>
 
+    <!-- 获取文章详情（带用户信息） -->
+    <select id="selectArticleVOById" resultType="com.nebula.model.vo.BlogArticleVO">
+        SELECT
+            a.*,
+            u.username,
+            u.nickname,
+            u.avatar as avatar,
+            c.name as categoryName
+        FROM blog_article a
+        LEFT JOIN sys_user u ON a.author_id = u.id
+        LEFT JOIN blog_category c ON a.category_id = c.id
+        WHERE a.id = #{id} AND a.deleted = false
+    </select>
+
+    <!-- 获取用户的文章列表 -->
+    <select id="selectArticleVOList" resultType="com.nebula.model.vo.BlogArticleVO">
+        SELECT
+            a.*,
+            u.username,
+            u.nickname,
+            u.avatar as avatar,
+            c.name as categoryName
+        FROM blog_article a
+        LEFT JOIN sys_user u ON a.author_id = u.id
+        LEFT JOIN blog_category c ON a.category_id = c.id
+        WHERE a.author_id = #{userId}
+          AND a.deleted = false
+          <if test="status != null">
+            AND a.status = #{status}
+          </if>
+        ORDER BY a.create_time DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <!-- 获取公开文章列表 -->
+    <select id="selectPublicArticleVOList" resultType="com.nebula.model.vo.BlogArticleVO">
+        SELECT
+            a.*,
+            u.username,
+            u.nickname,
+            u.avatar as avatar,
+            c.name as categoryName
+        FROM blog_article a
+        LEFT JOIN sys_user u ON a.author_id = u.id
+        LEFT JOIN blog_category c ON a.category_id = c.id
+        WHERE a.deleted = false
+          AND a.status = 'PUBLISHED'
+          <if test="keyword != null and keyword != ''">
+            AND (a.title LIKE CONCAT('%', #{keyword}, '%')
+                 OR a.content LIKE CONCAT('%', #{keyword}, '%')
+                 OR a.summary LIKE CONCAT('%', #{keyword}, '%'))
+          </if>
+          <if test="mood != null and mood != ''">
+            AND a.mood = #{mood}
+          </if>
+          <if test="tag != null and tag != ''">
+            AND EXISTS (
+                SELECT 1 FROM blog_article_tag bat
+                WHERE bat.article_id = a.id
+                  AND bat.tag_id = (SELECT id FROM blog_tag WHERE tag_name = #{tag} LIMIT 1)
+            )
+          </if>
+        ORDER BY
+            <if test="isTop != null and isTop == 1">
+              a.is_top DESC,
+            </if>
+            a.create_time DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <!-- 计算文章数量 -->
+    <select id="countArticles" resultType="long">
+        SELECT COUNT(*)
+        FROM blog_article
+        WHERE user_id = #{userId}
+          <if test="status != null">
+            AND status = #{status}
+          </if>
+          <if test="keyword != null and keyword != ''">
+            AND (title LIKE CONCAT('%', #{keyword}, '%')
+                 OR content LIKE CONCAT('%', #{keyword}, '%')
+                 OR summary LIKE CONCAT('%', #{keyword}, '%'))
+          </if>
+          <if test="mood != null and mood != ''">
+            AND a.mood = #{mood}
+          </if>
+          AND deleted = false
+    </select>
+
 </mapper>

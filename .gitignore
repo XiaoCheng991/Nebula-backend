@@ -34,3 +34,8 @@ build/
 /.agents/skills/*
 /.claude/skills/test-driven-development/
 /skills-lock.json
+
+# Environment files (sensitive - DO NOT commit)
+.env
+.env.*
+!.env.example

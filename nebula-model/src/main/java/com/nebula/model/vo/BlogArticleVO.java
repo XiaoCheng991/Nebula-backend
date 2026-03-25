@@ -1,30 +1,33 @@
-package com.nebula.model.entity.blog;
+package com.nebula.model.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nebula.model.entity.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.OffsetDateTime;
 
 /**
- * 博客文章实体
+ * 博客文章VO
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("blog_article")
 @Schema(description = "博客文章")
-public class BlogArticle extends BaseEntity {
+public class BlogArticleVO {
 
-    @TableId(type = IdType.AUTO)
     @Schema(description = "文章ID")
     private Long id;
 
-    @Schema(description = "文章标号")
+    @Schema(description = "用户ID")
+    private Long userId;
+
+    @Schema(description = "用户名")
+    private String username;
+
+    @Schema(description = "昵称")
+    private String nickname;
+
+    @Schema(description = "头像")
+    private String avatar;
+
+    @Schema(description = "文章标题")
     private String title;
 
     @Schema(description = "文章别名")
@@ -44,6 +47,9 @@ public class BlogArticle extends BaseEntity {
 
     @Schema(description = "分类ID")
     private Long categoryId;
+
+    @Schema(description = "分类名称")
+    private String categoryName;
 
     @Schema(description = "作者ID")
     private Long authorId;
@@ -87,13 +93,19 @@ public class BlogArticle extends BaseEntity {
     @Schema(description = "天气")
     private String weather;
 
-    @Schema(description = "标签")
+    @Schema(description = "是否已点赞")
+    private Boolean isLiked;
+
+    @Schema(description = "创建时间")
+    private OffsetDateTime createTime;
+
+    @Schema(description = "更新时间")
+    private OffsetDateTime updateTime;
+
+    @Schema(description = "标签列表")
     private String tags;
 
-    @Schema(description = "是否公开")
-    private Boolean isPublic;
+    @Schema(description = "评论列表")
+    private String comments;
 
-    @TableLogic
-    @Schema(description = "逻辑删除标志")
-    private Integer deleted;
 }
