@@ -1,5 +1,6 @@
 package com.nebula.common.util;
 
+import com.nebula.common.exception.RedisException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.DataType;
@@ -26,14 +27,13 @@ public class RedisUtil {
     /**
      * 设置值
      */
-    public boolean set(String key, Object value) {
+    public void set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
             LogUtil.Redis.set(log, key, -1);
-            return true;
         } catch (Exception e) {
             LogUtil.Redis.error(log, "set", key, e.getMessage());
-            return false;
+            throw new RedisException("set", key, "Failed to set value", e);
         }
     }
 
