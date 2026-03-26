@@ -1,0 +1,97 @@
+# 生产环境配置（用于 Render 部署）
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: nebula-admin
+
+  # 数据源配置（从环境变量获取）
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATABASE_USER:admin}
+    password: ${DATABASE_PASSWORD:admin}
+
+  # Redis 配置（Render 暂不支持，生产环境可移除或使用第三方）
+  # 注意：Render 免费层级不支持 Redis，需要改用内存缓存或第三方服务
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+
+  # 邮件配置（从环境变量获取）
+  mail:
+    host: ${MAIL_HOST:smtp.example.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.trust: "*"
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.nebula.model.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# Knife4j 配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# MinIO 配置（从环境变量获取）
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket-name: ${MINIO_BUCKET:user-uploads}
+
+# 日志配置（生产环境使用 INFO 级别）
+logging:
+  level:
+    root: INFO
+    com.nebula: INFO
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+
+############## Sa-Token 配置 ##############
+sa-token:
+  token-name: satoken
+  timeout: ${SA_TOKEN_TIMEOUT:2592000}
+  active-timeout: -1
+  is-concurrent: true
+  is-share: false
+  token-style: uuid
+  is-log: true
+
+# GitHub OAuth 配置（从环境变量获取）
+github:
+  oauth:
+    client-id: ${GITHUB_CLIENT_ID:}
+    client-secret: ${GITHUB_CLIENT_SECRET:}
+    redirect-uri: ${GITHUB_REDIRECT_URI:http://localhost:8080/api/oauth/github/callback}
+    frontend-callback-url: ${FRONTEND_CALLBACK_URL:http://localhost:3000/auth/github/callback}

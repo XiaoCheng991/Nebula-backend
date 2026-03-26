@@ -1,0 +1,582 @@
+2026-03-25 11:08:19.728 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 37827 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-25 11:08:19.729 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-25 11:08:19.729 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-25 11:08:21.374 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+2026-03-25 11:08:22.634 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 85 mappings in 'requestMappingHandlerMapping'
+2026-03-25 11:08:22.676 [main] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-03-25 11:08:22.734 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-03-25 11:08:22.828 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-03-25 11:08:23.374 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 4.013 seconds (process running for 5.297)
+2026-03-25 11:08:34.002 [http-nio-8080-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-25 11:08:34.004 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2026-03-25 11:08:34.005 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2026-03-25 11:08:34.005 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2026-03-25 11:08:34.008 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6155aefd
+2026-03-25 11:08:34.008 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@e69154
+2026-03-25 11:08:34.008 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-03-25 11:08:34.008 [http-nio-8080-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-03-25 11:08:34.047 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:08:34.047 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:34.048 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:08:34.048 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:34.399 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:34.406 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:34.413 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:34.413 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:34.446 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:34.446 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:34.472 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:34.472 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:34.473 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:34.477 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:08:34.484 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:34.485 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:34.486 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:34.486 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:34.489 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:34.490 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:34.491 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:34.492 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:34.492 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:34.493 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:34.499 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:08:34.500 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:08:34.531 [http-nio-8080-exec-8] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:08:34.531 [http-nio-8080-exec-8] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:08:34.541 [http-nio-8080-exec-8] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:08:34.542 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:34.542 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:08:34.544 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:34.549 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:08:34.549 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:08:34.552 [http-nio-8080-exec-10] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:08:34.552 [http-nio-8080-exec-10] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:08:34.562 [http-nio-8080-exec-10] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:08:34.563 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:34.564 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:08:34.567 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:53.973 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:08:53.973 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:53.975 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:53.975 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:08:53.991 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:53.991 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:53.991 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:53.991 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:54.000 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:54.000 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:54.002 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:54.002 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:54.002 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:08:54.002 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:54.007 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:54.007 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:54.010 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:54.010 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:54.012 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:54.012 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:54.013 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:54.013 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:54.014 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:54.014 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:54.148 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:08:54.148 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:08:54.153 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:08:54.153 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:08:54.156 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:08:54.156 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:54.156 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:08:54.157 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:54.198 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:08:54.198 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:08:54.204 [http-nio-8080-exec-4] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:08:54.204 [http-nio-8080-exec-4] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:08:54.239 [http-nio-8080-exec-4] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:08:54.241 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:54.242 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:08:54.259 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:55.443 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:55.447 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:55.447 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:08:55.448 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:08:55.455 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:55.455 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:55.457 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:55.458 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:55.458 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:55.458 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:55.458 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:55.459 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:55.462 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:55.462 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:55.463 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:08:55.463 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:08:55.463 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:08:55.466 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:55.469 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:08:55.469 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:08:55.474 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:08:55.475 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:08:55.475 [http-nio-8080-exec-3] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:08:55.475 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:55.475 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:08:55.476 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:55.479 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:08:55.479 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:08:55.480 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:08:55.481 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:55.481 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:08:55.481 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:08:55.485 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:08:55.485 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:08:55.490 [http-nio-8080-exec-5] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:08:55.490 [http-nio-8080-exec-5] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:08:55.507 [http-nio-8080-exec-5] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:08:55.509 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:08:55.509 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:08:55.510 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:52.739 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:12:52.739 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:12:52.741 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:12:52.741 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:12:52.760 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:52.760 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:52.761 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:52.761 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:52.765 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:52.765 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:52.769 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:52.769 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:52.769 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:12:52.769 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:12:52.774 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:52.774 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:52.777 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:12:52.778 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:12:52.779 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:12:52.779 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:12:52.782 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:52.782 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:52.784 [http-nio-8080-exec-1] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:12:52.784 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:52.784 [http-nio-8080-exec-1] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:12:52.784 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:52.785 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:12:52.785 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:52.793 [http-nio-8080-exec-1] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:12:52.794 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:52.794 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:12:52.794 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:52.798 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:12:52.798 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:12:52.802 [http-nio-8080-exec-3] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:12:52.802 [http-nio-8080-exec-3] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:12:52.808 [http-nio-8080-exec-3] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:12:52.809 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:52.809 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:12:52.810 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:56.668 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:12:56.669 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:12:56.669 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:12:56.670 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:12:56.676 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:56.676 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:56.678 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:56.679 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:56.679 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:56.679 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:56.679 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:12:56.680 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:56.681 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:56.681 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:56.681 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:12:56.682 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:56.683 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:12:56.683 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:12:56.685 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:12:56.686 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:12:56.687 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:12:56.688 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:56.688 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:12:56.688 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:56.706 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:12:56.706 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:12:56.710 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:12:56.711 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:12:56.712 [http-nio-8080-exec-10] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:12:56.712 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:56.712 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:12:56.713 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:12:56.716 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:12:56.716 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:12:56.724 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:12:56.725 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:12:56.728 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:12:56.729 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:12:56.729 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:12:56.730 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:01.980 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:01.981 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:01.993 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:01.994 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:01.998 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:02.000 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:02.000 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:02.001 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:02.003 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:02.003 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:02.008 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:02.008 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:02.023 [http-nio-8080-exec-8] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:02.027 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:02.030 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:02.031 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:17.372 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:13:17.372 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:17.373 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:13:17.373 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:17.392 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:17.392 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:17.392 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:17.392 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:17.395 [http-nio-8080-exec-4] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:17.395 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:17.400 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:17.400 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:17.401 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:17.401 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:13:17.404 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:17.404 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:17.407 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:17.407 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:17.409 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:17.409 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:17.410 [http-nio-8080-exec-2] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:17.410 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:17.410 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:17.411 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:17.420 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:13:17.420 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:13:17.431 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:13:17.431 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:13:17.433 [http-nio-8080-exec-6] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:13:17.433 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:17.433 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:13:17.434 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:17.436 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:13:17.436 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:13:17.439 [http-nio-8080-exec-1] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:13:17.439 [http-nio-8080-exec-1] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:13:17.442 [http-nio-8080-exec-1] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:13:17.442 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:17.443 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:13:17.443 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:19.473 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:19.473 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:19.473 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:13:19.473 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:13:19.484 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:19.484 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:19.485 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:19.486 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:19.486 [http-nio-8080-exec-9] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:19.486 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:19.486 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:19.487 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:19.487 [http-nio-8080-exec-7] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:19.488 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:19.488 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:13:19.489 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:19.489 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:19.489 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:19.492 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:19.492 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:19.493 [http-nio-8080-exec-10] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:19.493 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:19.494 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:19.494 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:19.494 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:13:19.495 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:13:19.498 [http-nio-8080-exec-4] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:13:19.499 [http-nio-8080-exec-4] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:13:19.501 [http-nio-8080-exec-4] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:13:19.501 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:19.502 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:13:19.502 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:19.516 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:13:19.516 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:13:19.520 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:13:19.521 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:13:19.527 [http-nio-8080-exec-2] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:13:19.528 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:19.529 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:13:19.530 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:23.261 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:23.261 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:13:23.261 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:23.261 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:13:23.266 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:23.266 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:23.267 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:23.267 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:23.268 [http-nio-8080-exec-6] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:23.268 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:23.269 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:23.269 [http-nio-8080-exec-1] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:23.269 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:23.269 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=SysUser(id=1, username=Admin_01, password=$2a$10$C5n/z0dOr9gE (truncated)...]
+2026-03-25 11:13:23.269 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:23.270 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:23.271 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/user/profile", parameters={}
+2026-03-25 11:13:23.271 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.ProfileController#getUserProfile()
+2026-03-25 11:13:23.275 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==>  Preparing: SELECT id,username,password,email,phone,nickname,avatar_name,avatar_url,avatar_size,bio,online_status,account_status,last_login_at,last_seen_at,create_time,update_time,deleted FROM sys_users WHERE id=? AND deleted=0
+2026-03-25 11:13:23.275 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - ==> Parameters: 1(Long)
+2026-03-25 11:13:23.277 [http-nio-8080-exec-5] DEBUG c.nebula.service.mapper.SysUserMapper.selectById - <==      Total: 1
+2026-03-25 11:13:23.277 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:23.277 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=ProfileController.UserProfileVO(id=1, username=Admin_01, emai (truncated)...]
+2026-03-25 11:13:23.278 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:23.292 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/role/user/1", parameters={}
+2026-03-25 11:13:23.292 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysRoleController#getRolesByUserId(Long)
+2026-03-25 11:13:23.296 [http-nio-8080-exec-3] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==>  Preparing: SELECT id,role_name,role_code,data_scope,description,is_system,sort_order,status,create_time,update_time,deleted FROM sys_role WHERE deleted=0 AND (id IN (SELECT role_id FROM sys_user_role WHERE user_id = 1) AND status = ?)
+2026-03-25 11:13:23.297 [http-nio-8080-exec-3] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - ==> Parameters: ACTIVE(String)
+2026-03-25 11:13:23.298 [http-nio-8080-exec-3] DEBUG c.n.service.mapper.system.SysRoleMapper.selectList - <==      Total: 1
+2026-03-25 11:13:23.299 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:23.299 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysRole(id=1, roleName=超级管理员, roleCode=super_admin, dataScop (truncated)...]
+2026-03-25 11:13:23.299 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:23.307 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/menu/user", parameters={}
+2026-03-25 11:13:23.307 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysMenuController#getUserMenuTree()
+2026-03-25 11:13:23.312 [http-nio-8080-exec-8] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==>  Preparing: SELECT DISTINCT m.* FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.deleted = 0 AND m.is_visible = true ORDER BY m.sort_order ASC
+2026-03-25 11:13:23.312 [http-nio-8080-exec-8] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - ==> Parameters: 1(Long)
+2026-03-25 11:13:23.320 [http-nio-8080-exec-8] DEBUG c.n.s.m.s.SysMenuMapper.selectMenuListByUserId - <==      Total: 69
+2026-03-25 11:13:23.321 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:23.322 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=success, data=[SysMenu(id=1504, parentId=0, menuType=directory, menuName=首页 (truncated)...]
+2026-03-25 11:13:23.324 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:28.859 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/auth/logout", parameters={}
+2026-03-25 11:13:28.860 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.AuthController#logout()
+2026-03-25 11:13:28.957 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:13:28.957 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:13:28.964 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.nebula.config.exception.GlobalExceptionHandler#handleRuntimeException(RuntimeException)
+2026-03-25 11:13:28.965 [http-nio-8080-exec-1] ERROR c.nebula.config.exception.GlobalExceptionHandler - 运行时异常: 未登录，请先登录
+com.nebula.common.exception.BusinessException: 未登录，请先登录
+	at com.nebula.api.interceptor.PermissionInterceptor.preHandle(PermissionInterceptor.java:42)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-25 11:13:28.974 [http-nio-8080-exec-2] INFO  com.nebula.service.impl.AuthServiceImpl - 用户登出 | userId=1
+2026-03-25 11:13:28.975 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:28.976 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [Result(code=200, message=登出成功, data=null, timestamp=1774408408975)]
+2026-03-25 11:13:28.976 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2026-03-25 11:13:28.981 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:28.982 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [Result(code=500, message=系统异常，请联系管理员, data=null, timestamp=1774408408978)]
+2026-03-25 11:13:28.987 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [BusinessException{code=2001, message='未登录，请先登录'}]
+2026-03-25 11:13:28.988 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/admin/system/user/current", parameters={}
+2026-03-25 11:13:28.988 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.nebula.api.controller.admin.system.SysUserAdminController#getCurrentUser()
+2026-03-25 11:13:28.988 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2026-03-25 11:13:28.991 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.nebula.config.exception.GlobalExceptionHandler#handleRuntimeException(RuntimeException)
+2026-03-25 11:13:28.991 [http-nio-8080-exec-6] ERROR c.nebula.config.exception.GlobalExceptionHandler - 运行时异常: 未登录，请先登录
+com.nebula.common.exception.BusinessException: 未登录，请先登录
+	at com.nebula.api.interceptor.PermissionInterceptor.preHandle(PermissionInterceptor.java:42)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-25 11:13:28.992 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-03-25 11:13:28.993 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [Result(code=500, message=系统异常，请联系管理员, data=null, timestamp=1774408408992)]
+2026-03-25 11:13:28.993 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [BusinessException{code=2001, message='未登录，请先登录'}]
+2026-03-25 11:13:28.993 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2026-03-25 16:44:01.150 [main] INFO  com.nebula.admin.NebulaAdminApplication - Starting NebulaAdminApplication using Java 21.0.10 with PID 42400 (/Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend/nebula-admin/target/classes started by orange in /Users/orange/02_CodeSpace/betterFuture/NebulaHub/Nebula-backend)
+2026-03-25 16:44:01.150 [main] DEBUG com.nebula.admin.NebulaAdminApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-03-25 16:44:01.151 [main] INFO  com.nebula.admin.NebulaAdminApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-25 16:44:02.047 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+2026-03-25 16:44:02.790 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 85 mappings in 'requestMappingHandlerMapping'
+2026-03-25 16:44:02.826 [main] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-03-25 16:44:02.880 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-03-25 16:44:02.897 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-03-25 16:44:03.181 [main] INFO  com.nebula.admin.NebulaAdminApplication - Started NebulaAdminApplication in 2.279 seconds (process running for 3.19)

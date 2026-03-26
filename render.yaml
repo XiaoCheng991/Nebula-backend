@@ -1,0 +1,58 @@
+# Render 配置文件中
+# 文档：https://render.com/docs/render-yaml
+
+services:
+  # Spring Boot 后端服务
+  - type: web
+    name: nebulahub-backend
+    env: java
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    plan: free
+
+    # 环境变量
+    envVars:
+      # Spring 配置（使用 production profile）
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+
+      # 数据库配置（Render 会自动提供 PostgreSQL）
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nebulahub-db
+          property: connectionString
+
+      # Sa-Token 配置
+      - key: SA_TOKEN_TIMEOUT
+        value: "2592000"
+
+      # MinIO 配置（如果有对象存储服务）
+      - key: MINIO_ENDPOINT
+        sync: false  # 手动配置
+
+      # GitHub OAuth 配置（可选）
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+
+      # 日志级别
+      - key: LOGGING_LEVEL_ROOT
+        value: INFO
+      - key: LOGGING_LEVEL_COM_NEBULA
+        value: INFO
+
+    # 健康检查
+    healthCheckPath: /actuator/health
+
+    # 区域（选择离你最近的）
+    region: oregon
+
+  # PostgreSQL 数据库
+  databases:
+    - name: nebulahub-db
+      databaseName: nebulahub
+      user: nebulahubuser
+      plan: free
+      region: oregon
+      version: "15"
